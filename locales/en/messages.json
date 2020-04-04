@@ -1,0 +1,404 @@
+{
+    "translation_version": {
+        "message": "0"
+    },
+    "windowTitle": {
+        "message": "Embedded Node",
+        "description": "Title of the application window, usually not translated"
+    },
+    "error": {
+        "message": "Error: {{errorMessage}}"
+    },
+    "errorTitle": {
+        "message": "Error"
+    },
+    "warningTitle": {
+        "message": "Warning"
+    },
+    "noticeTitle": {
+        "message": "Notice"
+    },
+    "options_title": {
+        "message": "Application Options"
+    },
+    "connect": {
+        "message": "Connect"
+    },
+    "connecting": {
+        "message": "Connecting"
+    },
+    "disconnect": {
+        "message": "Disconnect"
+    },
+    "portsSelectManual": {
+        "message": "Manual Selection"
+    },
+    "portOverrideText": {
+        "message": "Port:"
+    },
+    "autoConnect": {
+        "message": "Auto-Connect"
+    },
+    "close": {
+        "message": "Close"
+    },
+    "autoConnectEnabled": {
+        "message": "Auto-Connect: Enabled - Configurator automatically tries to connect when new port is detected"
+    },
+    "autoConnectDisabled": {
+        "message": "Auto-Connect: Disabled - User needs to select the correct serial port and click \"Connect\" button on its own"
+    },
+    "expertMode": {
+        "message": "Enable Expert Mode"
+    },
+    "permanentExpertMode": {
+        "message": "Permanently enable Expert Mode"
+    },
+    "rememberLastTab": {
+        "message": "Reopen last tab on connect"
+    },
+    "userLanguageSelect": {
+        "message": "Language (need to restart the application for the changes to take effect)"
+    },
+    "language_default": {
+        "message": "Default"
+    },
+    "language_ca": {
+        "message": "Catal\u00e0 (ca)"
+    },
+    "language_de": {
+        "message": "Deutsch (de)"
+    },
+    "language_en": {
+        "message": "English (en)"
+    },
+    "language_es": {
+        "message": "Espa\u00f1ol (es)"
+    },
+    "language_fr": {
+        "message": "Fran\u00e7ais (fr)"
+    },
+    "language_id": {
+        "message": "Bahasa Indonesia (id)"
+    },
+    "language_it": {
+        "message": "Italiano (it)"
+    },
+    "language_ja": {
+        "message": "\u65E5\u672C\u8A9E (ja)"
+    },
+    "language_ko": {
+        "message": "\ud55c\uad6d\uc5b4 (ko)"
+    },
+    "language_lv": {
+        "message": "Latvie\u0161u (lv)"
+    },
+    "language_pt": {
+        "message": "Portugu\u00EAs (pt)"
+    },
+    "language_ru": {
+        "message": "\u0420\u0443\u0441\u0441\u043A\u0438\u0439 \u044F\u0437\u044B\u043A (ru)"
+    },
+    "language_sv": {
+        "message": "Svenska (sv)"
+    },
+    "language_zh_CN": {
+        "message": "\u7b80\u4f53\u4e2d\u6587 (zh_CN)"
+    },
+    "checkForConfiguratorUnstableVersions": {
+        "message": "Show update notifications for unstable versions of the configurator"
+    },
+    "configuratorUpdateNotice": {
+        "message": "You are using an outdated version of the <b>Embedded Node</b>.<br>Version <b>$1</b> is available online, please visit <a href=\"$2\" target=\"_blank\">the release page</a> to download and install the latest version with fixes and improvements.<br>Please close the configurator window before updating."
+    },
+    "configuratorUpdateWebsite": {
+        "message": "Go to Release Website"
+    },
+
+    "tabFirmwareFlasher": {
+        "message": "Firmware Flasher"
+    },
+    "tabLanding": {
+        "message": "Welcome"
+    },
+    "tabHelp": {
+        "message": "Documentation & Support"
+    },
+
+    "logActionHide": {
+        "message": "Hide Log"
+    },
+    "logActionShow": {
+        "message": "Show Log"
+    },
+
+    "serialPortOpened": {
+        "message": "Serial port <span class=\"message-positive\">successfully</span> opened with ID: $1"
+    },
+    "serialPortOpenFail": {
+        "message": "<span class=\"message-negative\">Failed</span> to open serial port"
+    },
+    "serialPortClosedOk": {
+        "message": "Serial port <span class=\"message-positive\">successfully</span> closed"
+    },
+    "serialPortClosedFail": {
+        "message": "<span class=\"message-negative\">Failed</span> to close serial port"
+    },
+    "serialUnrecoverable": {
+        "message": "Unrecoverable <span class=\"message-negative\">failure</span> of serial connection, disconnecting..."
+    },
+
+    "usbDeviceOpened": {
+        "message": "USB device <span class=\"message-positive\">successfully</span> opened with ID: $1"
+    },
+    "usbDeviceOpenFail": {
+        "message": "<span class=\"message-negative\">Failed</span> to open USB device!"
+    },
+    "usbDeviceClosed": {
+        "message": "USB device <span class=\"message-positive\">successfully</span> closed"
+    },
+    "usbDeviceCloseFail": {
+        "message": "<span class=\"message-negative\">Failed</span> to close USB device"
+    },
+    "usbDeviceUdevNotice": {
+        "message": "Are <strong>udev rules</strong> installed correctly? See docs for instructions"
+    },
+    "stm32UnprotectSuccessful": {
+        "message": "Unprotect successful."
+    },
+    "stm32UnprotectUnplug": {
+        "message": "ACTION REQUIRED: Unplug and re-connect flight controller in DFU mode to try flashing again!"
+    },
+    "stm32UnprotectFailed": {
+        "message": "Failed to unprotect board"
+    },
+    "stm32UnprotectInitFailed": {
+        "message": "Failed to initiate unprotect routine"
+    },
+
+    "noConfigurationReceived": {
+        "message": "No configuration received within <span class=\"message-negative\">10 seconds</span>, communication <span class=\"message-negative\">failed</span>"
+    },
+    "firmwareVersionNotSupported": {
+        "message": "This firmware version is <span class=\"message-negative\">not supported</span>. Please upgrade to firmware that supports api version <strong>$1</strong> or higher. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
+    },
+    "firmwareTypeNotSupported": {
+        "message": "Non - Cleanflight/Betaflight firmware is <span class=\"message-negative\">not supported</span>, except for CLI mode."
+    },
+    "firmwareUpgradeRequired": {
+        "message": "The firmware on this device needs upgrading to a newer version. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
+    },
+
+    "infoVersions": {
+        "message": "Running - OS: <strong>{{operatingSystem}}</strong>, Chrome: <strong>{{chromeVersion}}</strong>, Configurator: <strong>{{configuratorVersion}}</strong>",
+        "description": "Message that appears in the GUI log panel indicating operating system, Chrome version and Configurator version"
+    },
+    "buildServerLoaded": {
+        "message": "Loaded builds information for $1 from build server."
+    },
+    "buildServerLoadFailed": {
+        "message": "<b>Build server query for $1 releases failed, using cached information. Reason: <code>$2</code></b>"
+    },
+    "buildServerUsingCached": {
+        "message": "Using cached builds information for $1."
+    },
+    "releaseCheckLoaded": {
+        "message": "Loaded release information for $1 from GitHub."
+    },
+    "releaseCheckFailed": {
+        "message": "<b>GitHub query for $1 releases failed, using cached information. Reason: <code>$2</code></b>"
+    },
+    "releaseCheckCached": {
+        "message": "Using cached release information for $1 releases."
+    },
+    "releaseCheckNoInfo": {
+        "message": "No release information available for $1."
+    },
+
+    "versionLabelTarget": {
+        "message": "Target"
+    },
+    "versionLabelFirmware": {
+        "message": "Firmware"
+    },
+    "versionLabelConfigurator": {
+        "message": "Configurator"
+    },
+
+    "notifications_app_just_updated_to_version": {
+        "message": "Application just updated to version: $1"
+    },
+    "notifications_click_here_to_start_app": {
+        "message": "Click here to start the application"
+    },
+
+    "statusbar_port_utilization": {
+        "message": "Port usage (bps):"
+    },
+    "statusbar_usage_download": {
+        "message": "RX: $1"
+    },
+    "statusbar_usage_upload": {
+        "message": "TX: $1"
+    },
+    "statusbar_packet_error": {
+        "message": "Packet error:"
+    },
+    "statusbar_crc_error": {
+        "message": "CRC error:"
+    },
+
+    "defaultWelcomeIntro": {
+        "message": "Welcome to <strong>Embedded Node - Configurator</strong>, a utility designed to simplify updating and configuring your embedded application."
+    },
+
+    "defaultWelcomeHead": {
+        "message": "Hardware"
+    },
+    "defaultWelcomeText": {
+        "message": "The application supports all hardware that can run ENP. <br><br>Latest <a href=\"http://www.silabs.com/products/mcu/pages/usbtouartbridgevcpdrivers.aspx\" title=\"http://www.silabs.com\" target=\"_blank\">CP210x Drivers</a> can be downloaded from <a href=\"http://www.silabs.com/products/mcu/pages/usbtouartbridgevcpdrivers.aspx\" title=\"http://www.silabs.com\" target=\"_blank\">here</a><br />Latest <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" title=\"http://www.st.com\" target=\"_blank\">STM USB VCP Drivers</a> can be downloaded from <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" title=\"http://www.st.com\" target=\"_blank\">here</a><br />Latest <a href=\"http://zadig.akeo.ie/\" title=\"http://zadig.akeo.ie\" target=\"_blank\">Zadig</a> for Windows USB driver installation can be downloaded from <a href=\"http://zadig.akeo.ie/\" title=\"http://zadig.akeo.ie\" target=\"_blank\">here</a><br />"
+    },
+    "defaultContributingHead": {
+        "message": "Contributing"
+    },
+    "defaultContributingText": {
+        "message": "If you would like to help make Betaflight even better you can help in many ways, including:<br /><ul><li>Answering other users questions on the forums and IRC.</li><li>Contributing code to the firmware and configurator - new features, fixes, improvements</li><li>Testing <a href=\"https://github.com/Betaflight/betaflight/pulls\" target=\"_blank\">new features/fixes</a> and providing feedback.</li><li>Helping out with <a href=\"https://github.com/betaflight/betaflight/issues\" target=\"_blank\">issues and commenting on feature requests</a>.</li><li>Collaborate by <a href=\"https://crowdin.com/project/betaflight-configurator\" target=\"_blank\">translating the configurator application</a> into your language.</li><li></li></ul>"
+    },
+    "defaultFacebookText": {
+        "message": "We also have a <a href=\"https://www.facebook.com/groups/betaflightgroup/\" target=\"_blank\">Facebook Group</a>.<br />Join us to get a place to talk about Betaflight, ask configuration questions, or just hang out with fellow pilots."
+    },
+    "defaultChangelogAction": {
+        "message": "Changelog"
+    },
+    "defaultChangelogHead": {
+        "message": "Configurator - Changelog"
+    },
+    "defaultPrivacyPolicyAction": {
+        "message": "Privacy Policy"
+    },
+    "defaultButtonFirmwareFlasher": {
+        "message": "Firmware Flasher"
+    },
+    "defaultDonateHead": {
+        "message": "Open Source / Donation Notice"
+    },
+    "defaultDonateText": {
+        "message": "<strong>Embedded node</strong> is software that is <strong>open source</strong> and is available free of charge <strong>without warranty</strong> to all users.<br />If you found the ENP or Embedded node configurator useful, please consider <strong>supporting</strong> its development by donating."
+    },
+    "defaultDocumentationHead": {
+        "message": "Documentation / Manual"
+    },
+    "defaultDocumentation": {
+        "message": "Embedded node documentation is available in release notes and wiki.<br /><br />"
+    },
+    "defaultDocumentation1": {
+        "message": "The Embedded node protocol wiki is a great resource for information, it can be found <a href=\"https://github.com/embnode/enp/wiki\" target=\"_blank\">here</a>."
+    },
+
+    "defaultSupportHead": {
+        "message": "Support"
+    },
+    "defaultSupportSubline1": {
+        "message": "Support Sources"
+    },
+    "defaultSupportSubline2": {
+        "message": "Developer"
+    },
+    "defaultSupport": {
+        "message": "For support please search the forums and wiki first or contact your vendor.<br /><br />"
+    },
+    "defaultSupport1": {
+        "message": "<a href=\"http://www.rcgroups.com/forums/showthread.php?t=2464844&page=1\" target=\"_blank\">RC Groups thread</a>"
+    },
+    "defaultSupport2": {
+        "message": "<a href=\"http://betaflight.info\" target=\"_blank\">Betaflight Wiki</a>"
+    },
+    "defaultSupport3": {
+        "message": "<a href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8kdK6yHr7vhsU9iRTr5HxP4\" target=\"_blank\">Joshua Bardwell Betaflight Videos</a>"
+    },
+    "defaultSupport4": {
+        "message": "<a href=\"https://github.com/Betaflight\" target=\"_blank\">GitHub</a>"
+    },
+    "defaultSupport5": {
+        "message": "<a href=\"https://slack.betaflight.com\" target=\"_blank\">Betaflight devs on slack</a>"
+    },
+
+    "firmwareFlasherWarningText": {
+        "message": "Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>Bootloader is stored in flash memory, it can be bricked.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /><strong>Note:</strong> If you have problems flashing <strong>try disconnecting all cables from your board</strong> first, try rebooting, upgrade chrome, upgrade drivers.<br />"
+    },
+    "firmwareFlasherRecoveryHead": {
+        "message": "<strong>Recovery / Lost communication</strong>"
+    },
+    "firmwareFlasherRecoveryText": {
+        "message": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Power on</li><li>Install all drivers if required.<li>Close configurator, Close all running chrome instances, Close all Chrome apps, Restart Configurator.</li><li>Flash with correct firmware.</li><li>Power off.</li><li>Power on.</li><li>Connect normally.</li></ul>"
+    },
+    "firmwareFlasherButtonLeave": {
+        "message": "Leave Firmware Flasher"
+    },
+    "firmwareFlasherButtonLoadLocal": {
+        "message": "Load Firmware [Local]"
+    },
+    "firmwareFlasherFlashFirmware": {
+        "message": "Flash Firmware"
+    },
+    "firmwareFlasherFirmwareNotLoaded": {
+        "message": "Firmware not loaded"
+    },
+    "firmwareFlasherFirmwareLocalLoaded": {
+        "message": "Loaded Local Firmware: ($1 bytes)"
+    },
+    "firmwareFlasherHexCorrupted": {
+        "message": "HEX file appears to be corrupted"
+    },
+    "firmwareFlasherRemoteFirmwareLoaded": {
+        "message": "<span class=\"message-positive\">Remote Firmware loaded, ready for flashing</span>"
+    },
+    "firmwareFlasherFailedToLoadOnlineFirmware": {
+        "message": "Failed to load remote firmware"
+    },
+    "firmwareFlasherNoFirmwareSelected": {
+        "message": "<b>No firmware selected to load</b>"
+    },
+    "firmwareFlasherNoValidPort": {
+        "message": "<span class=\"message-negative\">Please select valid serial port</span>"
+    },
+    "firmwareFlasherWritePermissions": {
+        "message": "You don't have <span class=\"message-negative\">write permissions</span> for this file"
+    },
+    "firmwareFlasherFlashTrigger": {
+        "message": "Detected: <strong>$1</strong> - triggering flash on connect"
+    },
+    "firmwareFlasherPreviousDevice": {
+        "message": "Detected: <strong>$1</strong> - previous device still flashing, please replug to try again"
+    },
+    "firmwareFlasherWritten": {
+        "message": "Firmware has been written"
+    },
+    "firmwareFlasherPath": {
+        "message": "Path:"
+    },
+    "firmwareFlasherSize": {
+        "message": "Size:"
+    },
+    "firmwareFlasherStatus": {
+        "message": "Status:"
+    },
+    "firmwareFlasherProgress": {
+        "message": "Progress:"
+    },
+    "firmwareFlasherLoadFirmwareFile": {
+        "message": "Please load firmware file"
+    },
+
+    "tabNodes": {
+        "message": "Nodes"
+    },
+
+    "tabFilesystem": {
+        "message": "Filesystem"
+    },
+    "variableProperty": {
+        "message": "Variable"
+    }
+
+}

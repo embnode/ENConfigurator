@@ -1,0 +1,27 @@
+<div class="tab-filesystem">
+    <div class="content_wrapper">
+        <!--should be classed ASAP TODO-->
+        <div id="load">
+            <div class="data-loading">
+                <p>Loading ...</p>
+            </div>
+        </div>
+        <div id="fsUpBtn" style="display:inline-block;width:100%;height:32px;"><a href="javascript:fsDirUp();"><img src="images/upFolder32.png"/></a>
+            <div id="fsNavigation" style="display:inline-block;width:auto;vertical-align:center;height:32px;"><b> Current path: </b></div>
+        </div>
+        
+        <table id="uavFSTable">
+            <thead>
+                <tr>
+                    <td>Name</td><td>Kind</td><td>Size</td>
+                </tr>
+            </thead>
+            <tbody id="uavFSTableBody">
+
+            </tbody>
+            
+        </table>
+        <div id="fsDebugHeader" style="display:inline-block;width:100%;visibility:hidden;">Debug:</div> <!-- visibility:hidden; -->
+        <div id="fsDebug" style="display:inline-block;visibility:hidden;"></div><!-- visibility:hidden; -->
+    </div>
+</div>

@@ -1,0 +1,124 @@
+.tab-nodes_configuration {
+    position: relative;
+}
+
+.tab-nodes_configuration .leftWrapper {
+    float: left;
+    width: calc(70% - 20px);
+}
+
+.tab-nodes_configuration .rightWrapper {
+    float: left;
+    width: calc(30% - 0px);
+    margin: 0 0 0 20px;
+}
+
+.tab-nodes_configuration .number {
+    margin-bottom: 5px;
+    clear: left;
+}
+
+.tab-nodes_configuration .aux_set {
+    width: 100%;
+}
+
+.tab-nodes_configuration .number input {
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    text-align: left;
+    /* border: 1px solid silver; */
+    border-radius: 3px;
+    margin-right: 11px;
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.tab-nodes_configuration .inputValue {
+    background-color: #aaaaaa;
+    /*width: calc(70% - 2);*/
+    color: bisque;
+    display: inline-block;
+}
+
+.tab-nodes_configuration .button {
+    background-color: #aaaaaa;
+    color: bisque;
+    width: 100%;
+    height: 20px;
+    border-radius: 3px;
+    padding-left: 5px;
+}
+
+.tab-nodes_configuration .number input:disabled {
+    background-color: #ececec;
+}
+
+.tab-nodes_configuration .number span {
+    margin-left: 0;
+}
+
+.tab-nodes_configuration .sticky {
+    position: fixed;
+    margin: .6em 0 1.8em 0;
+}
+
+.tab-nodes_configuration input {
+    float: left;
+}
+
+.tab-nodes_configuration span {
+    margin: 0;
+}
+
+.tab-nodes_configuration .spacer_box {
+    padding-bottom: 10px;
+    float: left;
+    width: calc(100% - 20px);
+}
+
+.tab-nodes_configuration .mutable {
+    color: blue;
+}
+
+.tab-nodes_configuration .number {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+    float: left;
+}
+
+.tab-nodes_configuration .gui_box_titlebar {
+    margin-bottom: 0;
+}
+
+.IsLast {
+    background-image: url(../../images/tree_icons/i_half.svg);
+    background-repeat: no-repeat;
+}
+
+.tab-nodes_configuration .Container {
+    padding: 0;
+    margin: 0;
+}
+
+.tab-nodes_configuration .Container li {
+    list-style-type: none;
+}
+
+.tab-nodes_configuration .Expand {
+    width: 18px;
+    height: 18px;
+    float: left;
+}
+
+.tab-nodes_configuration .Content {
+    margin-left: 18px;
+    min-height: 18px;
+}
+
+
+/* @media only screen and (max-width: 1055px) , only screen and (max-device-width: 1055px) {
+
+} */
