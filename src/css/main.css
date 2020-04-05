@@ -882,14 +882,6 @@ li.active .ic_power {
     background-image: url(../images/icons/cf_icon_failsafe_grey.svg);
 }
 
-.ic_failsafe:hover {
-    background-image: url(../images/icons/cf_icon_failsafe_white.svg);
-}
-
-li.active .ic_failsafe {
-    background-image: url(../images/icons/cf_icon_failsafe_white.svg);
-}
-
 .ic_backup {
     background-image: url(../images/icons/cf_icon_backup_grey.svg);
 }
@@ -928,14 +920,6 @@ li.active .ic_advanced {
 
 .ic_mission {
     background-image: url(../images/icons/cf_icon_mission_grey.svg);
-}
-
-.ic_mission:hover {
-    background-image: url(../images/icons/cf_icon_mission_white.svg);
-}
-
-li.active .ic_mission {
-    background-image: url(../images/icons/cf_icon_mission_white.svg);
 }
 
 #content {
