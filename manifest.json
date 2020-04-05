@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "minimum_chrome_version": "38",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "author": "Embedded Node",
     "name": "Embedded Node - Configurator",
     "short_name": "ENP",
@@ -28,10 +28,12 @@
         "fileSystem.retainEntries",
         "notifications",
         "alwaysOnTopWindows",
-        {"usbDevices": [
-            {"vendorId": 1155, "productId": 57105},
-            {"vendorId": 10473, "productId": 393}
-        ]},
+        {
+            "usbDevices": [
+                { "vendorId": 1155, "productId": 57105 },
+                { "vendorId": 10473, "productId": 393 }
+            ]
+        },
         "webview",
         "unlimitedStorage"
     ],
@@ -41,12 +43,10 @@
         }
     },
     "webview": {
-        "partitions": [
-            {
-                "name": "map",
-                "accessible_resources" : ["tabs/map.html", "js/tabs/map.js", "/images/icons/cf_icon_position.png"]
-            }
-        ]
+        "partitions": [{
+            "name": "map",
+            "accessible_resources": ["tabs/map.html", "js/tabs/map.js", "/images/icons/cf_icon_position.png"]
+        }]
     },
     "icons": {
         "128": "images/enp_icon_128.png"

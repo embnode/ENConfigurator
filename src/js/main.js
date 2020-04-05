@@ -408,10 +408,10 @@ function startProcess() {
 };
 
 function checkForConfiguratorUpdates() {
-    // var releaseChecker = new ReleaseChecker('configurator',
-    // 'https://api.github.com/repos/betaflight/betaflight-configurator/releases');
+    var releaseChecker = new ReleaseChecker('configurator',
+        'https://api.github.com/repos/embnode/ENConfigurator/releases');
 
-    // releaseChecker.loadReleaseData(notifyOutdatedVersion);
+    releaseChecker.loadReleaseData(notifyOutdatedVersion);
 }
 
 function notifyOutdatedVersion(releaseData) {
@@ -617,7 +617,6 @@ function getManifestVersion(manifest) {
     if (!version) {
         version = manifest.version;
     }
-
     return version;
 }
 
