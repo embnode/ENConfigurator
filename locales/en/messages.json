@@ -147,46 +147,8 @@
     "serialUnrecoverable": {
         "message": "Unrecoverable <span class=\"message-negative\">failure</span> of serial connection, disconnecting..."
     },
-
-    "usbDeviceOpened": {
-        "message": "USB device <span class=\"message-positive\">successfully</span> opened with ID: $1"
-    },
-    "usbDeviceOpenFail": {
-        "message": "<span class=\"message-negative\">Failed</span> to open USB device!"
-    },
-    "usbDeviceClosed": {
-        "message": "USB device <span class=\"message-positive\">successfully</span> closed"
-    },
-    "usbDeviceCloseFail": {
-        "message": "<span class=\"message-negative\">Failed</span> to close USB device"
-    },
-    "usbDeviceUdevNotice": {
-        "message": "Are <strong>udev rules</strong> installed correctly? See docs for instructions"
-    },
-    "stm32UnprotectSuccessful": {
-        "message": "Unprotect successful."
-    },
-    "stm32UnprotectUnplug": {
-        "message": "ACTION REQUIRED: Unplug and re-connect flight controller in DFU mode to try flashing again!"
-    },
-    "stm32UnprotectFailed": {
-        "message": "Failed to unprotect board"
-    },
-    "stm32UnprotectInitFailed": {
-        "message": "Failed to initiate unprotect routine"
-    },
-
     "noConfigurationReceived": {
         "message": "No configuration received within <span class=\"message-negative\">10 seconds</span>, communication <span class=\"message-negative\">failed</span>"
-    },
-    "firmwareVersionNotSupported": {
-        "message": "This firmware version is <span class=\"message-negative\">not supported</span>. Please upgrade to firmware that supports api version <strong>$1</strong> or higher. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
-    },
-    "firmwareTypeNotSupported": {
-        "message": "Non - Cleanflight/Betaflight firmware is <span class=\"message-negative\">not supported</span>, except for CLI mode."
-    },
-    "firmwareUpgradeRequired": {
-        "message": "The firmware on this device needs upgrading to a newer version. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
     },
     "firmwareFlasherManualPort": {
         "message": "Port"
