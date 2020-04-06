@@ -147,48 +147,15 @@
     "serialUnrecoverable": {
         "message": "Unrecoverable <span class=\"message-negative\">failure</span> of serial connection, disconnecting..."
     },
-
-    "usbDeviceOpened": {
-        "message": "USB device <span class=\"message-positive\">successfully</span> opened with ID: $1"
-    },
-    "usbDeviceOpenFail": {
-        "message": "<span class=\"message-negative\">Failed</span> to open USB device!"
-    },
-    "usbDeviceClosed": {
-        "message": "USB device <span class=\"message-positive\">successfully</span> closed"
-    },
-    "usbDeviceCloseFail": {
-        "message": "<span class=\"message-negative\">Failed</span> to close USB device"
-    },
-    "usbDeviceUdevNotice": {
-        "message": "Are <strong>udev rules</strong> installed correctly? See docs for instructions"
-    },
-    "stm32UnprotectSuccessful": {
-        "message": "Unprotect successful."
-    },
-    "stm32UnprotectUnplug": {
-        "message": "ACTION REQUIRED: Unplug and re-connect flight controller in DFU mode to try flashing again!"
-    },
-    "stm32UnprotectFailed": {
-        "message": "Failed to unprotect board"
-    },
-    "stm32UnprotectInitFailed": {
-        "message": "Failed to initiate unprotect routine"
-    },
-
     "noConfigurationReceived": {
         "message": "No configuration received within <span class=\"message-negative\">10 seconds</span>, communication <span class=\"message-negative\">failed</span>"
     },
-    "firmwareVersionNotSupported": {
-        "message": "This firmware version is <span class=\"message-negative\">not supported</span>. Please upgrade to firmware that supports api version <strong>$1</strong> or higher. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
+    "firmwareFlasherManualPort": {
+        "message": "Port"
     },
-    "firmwareTypeNotSupported": {
-        "message": "Non - Cleanflight/Betaflight firmware is <span class=\"message-negative\">not supported</span>, except for CLI mode."
+    "firmwareFlasherBaudRate": {
+        "message": "Baud rate"
     },
-    "firmwareUpgradeRequired": {
-        "message": "The firmware on this device needs upgrading to a newer version. Use CLI for backup before flashing. CLI backup/restore procedure is in the documention.<br />Alternatively download and use an old version of the configurator if you are not ready to upgrade."
-    },
-
     "infoVersions": {
         "message": "Running - OS: <strong>{{operatingSystem}}</strong>, Chrome: <strong>{{chromeVersion}}</strong>, Configurator: <strong>{{configuratorVersion}}</strong>",
         "description": "Message that appears in the GUI log panel indicating operating system, Chrome version and Configurator version"
@@ -253,19 +220,16 @@
     },
 
     "defaultWelcomeHead": {
-        "message": "Hardware"
+        "message": "Info"
     },
     "defaultWelcomeText": {
-        "message": "The application supports all hardware that can run ENP. <br><br>Latest <a href=\"http://www.silabs.com/products/mcu/pages/usbtouartbridgevcpdrivers.aspx\" title=\"http://www.silabs.com\" target=\"_blank\">CP210x Drivers</a> can be downloaded from <a href=\"http://www.silabs.com/products/mcu/pages/usbtouartbridgevcpdrivers.aspx\" title=\"http://www.silabs.com\" target=\"_blank\">here</a><br />Latest <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" title=\"http://www.st.com\" target=\"_blank\">STM USB VCP Drivers</a> can be downloaded from <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" title=\"http://www.st.com\" target=\"_blank\">here</a><br />Latest <a href=\"http://zadig.akeo.ie/\" title=\"http://zadig.akeo.ie\" target=\"_blank\">Zadig</a> for Windows USB driver installation can be downloaded from <a href=\"http://zadig.akeo.ie/\" title=\"http://zadig.akeo.ie\" target=\"_blank\">here</a><br />"
+        "message": "The application supports all hardware with implemented Embedded node protocol. <br><br>The Embedded node protocol wiki is a great resource for information, it can be found <a href=\"https://github.com/embnode/enp/wiki\" target=\"_blank\">here</a>.<br />"
     },
     "defaultContributingHead": {
         "message": "Contributing"
     },
     "defaultContributingText": {
-        "message": "If you would like to help make Betaflight even better you can help in many ways, including:<br /><ul><li>Answering other users questions on the forums and IRC.</li><li>Contributing code to the firmware and configurator - new features, fixes, improvements</li><li>Testing <a href=\"https://github.com/Betaflight/betaflight/pulls\" target=\"_blank\">new features/fixes</a> and providing feedback.</li><li>Helping out with <a href=\"https://github.com/betaflight/betaflight/issues\" target=\"_blank\">issues and commenting on feature requests</a>.</li><li>Collaborate by <a href=\"https://crowdin.com/project/betaflight-configurator\" target=\"_blank\">translating the configurator application</a> into your language.</li><li></li></ul>"
-    },
-    "defaultFacebookText": {
-        "message": "We also have a <a href=\"https://www.facebook.com/groups/betaflightgroup/\" target=\"_blank\">Facebook Group</a>.<br />Join us to get a place to talk about Betaflight, ask configuration questions, or just hang out with fellow pilots."
+        "message": "If you would like to help make Embedded node even better you can help in many ways, including:<br /><ul><li>Testing <a href=\"https://github.com/embnode/ENConfigurator/pulls\" target=\"_blank\">new features/fixes</a> and providing feedback.</li><li>Helping out with <a href=\"https://github.com/embnode/ENConfigurator/issues\" target=\"_blank\">issues and commenting on feature requests</a>.</li><li>Collaborate by translating the configurator application into your language.</li><li></li></ul>"
     },
     "defaultChangelogAction": {
         "message": "Changelog"
@@ -284,6 +248,9 @@
     },
     "defaultDonateText": {
         "message": "<strong>Embedded node</strong> is software that is <strong>open source</strong> and is available free of charge <strong>without warranty</strong> to all users.<br />If you found the ENP or Embedded node configurator useful, please consider <strong>supporting</strong> its development by donating."
+    },
+    "defaultDonate": {
+        "message": "Donate"
     },
     "defaultDocumentationHead": {
         "message": "Documentation / Manual"
@@ -304,25 +271,6 @@
     "defaultSupportSubline2": {
         "message": "Developer"
     },
-    "defaultSupport": {
-        "message": "For support please search the forums and wiki first or contact your vendor.<br /><br />"
-    },
-    "defaultSupport1": {
-        "message": "<a href=\"http://www.rcgroups.com/forums/showthread.php?t=2464844&page=1\" target=\"_blank\">RC Groups thread</a>"
-    },
-    "defaultSupport2": {
-        "message": "<a href=\"http://betaflight.info\" target=\"_blank\">Betaflight Wiki</a>"
-    },
-    "defaultSupport3": {
-        "message": "<a href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8kdK6yHr7vhsU9iRTr5HxP4\" target=\"_blank\">Joshua Bardwell Betaflight Videos</a>"
-    },
-    "defaultSupport4": {
-        "message": "<a href=\"https://github.com/Betaflight\" target=\"_blank\">GitHub</a>"
-    },
-    "defaultSupport5": {
-        "message": "<a href=\"https://slack.betaflight.com\" target=\"_blank\">Betaflight devs on slack</a>"
-    },
-
     "firmwareFlasherWarningText": {
         "message": "Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>Bootloader is stored in flash memory, it can be bricked.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /><strong>Note:</strong> If you have problems flashing <strong>try disconnecting all cables from your board</strong> first, try rebooting, upgrade chrome, upgrade drivers.<br />"
     },
