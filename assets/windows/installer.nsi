@@ -9,14 +9,14 @@
 # ${DEST_FOLDER} - Destination folder for the installer files
 
 # Some definitions
-!define SOURCE_FILES          "..\..\apps\betaflight-configurator\${PLATFORM}\*"
+!define SOURCE_FILES          "..\..\apps\emnode-configurator\${PLATFORM}\*"
 !define APP_NAME              "Embedded Node"
-!define COMPANY_NAME          "VRT Initiative Group"
-!define GROUP_NAME            "VRTIG"
-!define FOLDER_NAME           "Betaflight-Configurator"
-!define FILE_NAME_INSTALLER   "betaflight-configurator-installer_${VERSION}_${PLATFORM}.exe"
-!define FILE_NAME_UNINSTALLER "uninstall-betaflight-configurator.exe"
-!define FILE_NAME_EXECUTABLE  "betaflight-configurator.exe"
+!define COMPANY_NAME          "Embedded Node Company"
+!define GROUP_NAME            "emnode"
+!define FOLDER_NAME           "emnode-Configurator"
+!define FILE_NAME_INSTALLER   "emnode-configurator-installer_${VERSION}_${PLATFORM}.exe"
+!define FILE_NAME_UNINSTALLER "uninstall-emnode-configurator.exe"
+!define FILE_NAME_EXECUTABLE  "emnode-configurator.exe"
 !define LICENSE               "..\..\LICENSE"
 
 
@@ -24,8 +24,8 @@ Name "${APP_NAME}"
 BrandingText "${COMPANY_NAME}"
 
 # set the icon
-!define MUI_ICON ".\bf_installer_icon.ico"
-!define MUI_UNICON ".\bf_uninstaller_icon.ico"
+!define MUI_ICON ".\enp_installer_icon.ico"
+!define MUI_UNICON ".\enp_uninstaller_icon.ico"
 
 #Define uninstall list name
 !define UninstName "uninbf00"
@@ -46,19 +46,7 @@ OutFile "..\..\${DEST_FOLDER}\${FILE_NAME_INSTALLER}"
 
 !insertmacro MUI_PAGE_FINISH
 !insertmacro MUI_LANGUAGE "English"
-!insertmacro MUI_LANGUAGE "Catalan"
-!insertmacro MUI_LANGUAGE "French"
-!insertmacro MUI_LANGUAGE "German"
-!insertmacro MUI_LANGUAGE "Indonesian"
-!insertmacro MUI_LANGUAGE "Italian"
-!insertmacro MUI_LANGUAGE "Japanese"
-!insertmacro MUI_LANGUAGE "Korean"
-!insertmacro MUI_LANGUAGE "Latvian"
-!insertmacro MUI_LANGUAGE "Portuguese"
 !insertmacro MUI_LANGUAGE "Russian"
-!insertmacro MUI_LANGUAGE "SimpChinese"
-!insertmacro MUI_LANGUAGE "Spanish"
-!insertmacro MUI_LANGUAGE "Swedish"
 
 # detect default install folder
 Function .onInit

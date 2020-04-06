@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=Embedded Node
 Comment=Crossplatform configuration tool for ENP systems
-Exec=/opt/betaflight/betaflight-configurator/betaflight-configurator
-Icon=/opt/betaflight/betaflight-configurator/icon/enp_icon_128.png
+Exec=/opt/emnode/emnode-configurator/emnode-configurator
+Icon=/opt/emnode/emnode-configurator/icon/enp_icon_128.png
 Terminal=false
 Type=Application
 Categories=Utility
