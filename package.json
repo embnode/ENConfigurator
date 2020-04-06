@@ -1,7 +1,7 @@
 {
     "name": "emnode-configurator",
     "description": "Crossplatform configuration tool for Embedded node protocol.",
-    "version": "0.0.0",
+    "version": "0.0.2",
     "main": "main_nwjs.html",
     "bg-script": "js/eventPage.js",
     "default_locale": "en",
