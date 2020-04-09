@@ -315,6 +315,7 @@ GUI_control.prototype.selectDefaultTabWhenConnected = function() {
         //     return;
         // }
         //$("#tabs ul.mode-connected ." + result.lastTab + " a").click();
+        $('#mainProgressBar').hide();
         $('#tabs ul.mode-connected .tab_nodes_configuration a').click();
     });
 };
