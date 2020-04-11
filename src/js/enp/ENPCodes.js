@@ -36,6 +36,13 @@ var ENPCodes = {
     ENP_PACKVARNUM : 50,
 };
 
+var ENPStep = {
+    INIT : 0,
+    DESCRIPTION : 1,
+    VARIABLE : 2,
+    FINISH : 3,
+}
+
 // Error codes
 var ENPErrorCodes = {
     ENP_ERROR_NONE : 0, // no error

@@ -237,9 +237,9 @@ function onOpen(openInfo) {
                 chrome.storage.local.set({ 'last_used_id': idFieldValue });
             }
         });
-        id = parseInt(idFieldValue);
-        GUI.log('Load device id: ' + id);
-        ENP.send_message(id, ENPCodes.ENP_CMD_GETNODENUM, false, false, function() {
+        deviceID = parseInt(idFieldValue);
+        GUI.log('Load device id: ' + deviceID);
+        ENP.send_message(deviceID, ENPCodes.ENP_CMD_GETNODENUM, false, false, function() {
             GUI.log('Number nodes: ' + nodesNumber);
             loadEnpConfig();
         });

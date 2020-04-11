@@ -2,6 +2,7 @@
 
 var nodes = [];
 var nodevars = [];
+var configLoaderInfo = [];
 var nodesNumber;
 var nodesMaxIndex = 0;
 var currentNodeId = 0;
@@ -10,7 +11,7 @@ var currentNode = 0;
 var currentValueNumber = 0;
 var currentVariable = 0;
 
-var id = 2;
+var deviceID = 2;
 const NUMBER_READ_VALUE = 5;
 var setValueInfo = {};
 var sendFlag = 0;
@@ -57,7 +58,6 @@ EnpHelper.prototype.process_data = function(dataHandler) {
                 nod.vars = [];
                 nodes.push(nod);
                 nodesMaxIndex++;
-                // console.log(nodes);
                 GUI.log('node: ' + nod.name);
                 break;
             case ENPCodes.ENP_CMD_GETVARDESCR:
@@ -216,37 +216,61 @@ EnpHelper.prototype.process_data = function(dataHandler) {
 
 function
 loadEnpConfig() {
-    if (currentNode < nodesNumber) {
-        var bufferOut = new ArrayBuffer(2);
-        var uint16Array = new Uint8Array(bufferOut);
-        uint16Array[0] = currentNode;
-        var uint8Array = new Uint8Array(bufferOut);
-        // load node description
-        ENP.send_message(
-            id, ENPCodes.ENP_CMD_GETNODEDESCR, uint8Array, false, loadVariable);
-    } else {
-        // stop load config
-        currentNode = 0;
-        finishOpen();
+    // init config loader
+    configLoaderInfo.step = ENPStep.INIT;
+    configLoader();
+}
+
+function configLoader(){
+    switch (configLoaderInfo.step) {
+        case ENPStep.INIT:
+            configLoaderInfo.currentNode = 0;
+            configLoaderInfo.currVar = 0;
+            configLoaderInfo.step = ENPStep.DESCRIPTION;
+            configLoader();
+            break;
+        case ENPStep.DESCRIPTION:
+            loadNodeDescription(configLoaderInfo.currentNode, configLoader);
+            configLoaderInfo.currentNode++;
+            if(configLoaderInfo.currentNode >= nodesNumber){
+                configLoaderInfo.step = ENPStep.VARIABLE;
+                configLoaderInfo.currVar = 0;
+                configLoaderInfo.currentNode = 0;
+            }
+            break;
+        case ENPStep.VARIABLE:
+            let currNode = configLoaderInfo.currentNode;
+            loadVariableDescr(nodes[currNode].id, configLoaderInfo.currVar, configLoader);
+            configLoaderInfo.currVar++
+            if (configLoaderInfo.currVar >= nodes[currNode].numberOfVar) {
+                configLoaderInfo.currentNode++;
+                configLoaderInfo.currVar = 0;
+                if(configLoaderInfo.currentNode >= nodesNumber){
+                    configLoaderInfo.step = ENPStep.FINISH;
+                }
+            }
+            break;
+        case ENPStep.FINISH:
+            finishOpen();
+            break;
     }
 }
 
-function
-loadVariable() {
-    if (currentVariable < nodes[currentNode].numberOfVar) {
-        var bufferOut = new ArrayBuffer(4);
-        var uint16Array = new Uint16Array(bufferOut);
-        uint16Array[0] = nodes[currentNode].id;
-        uint16Array[1] = currentVariable;
-        var uint8Array = new Uint8Array(bufferOut);
-        ENP.send_message(
-            id, ENPCodes.ENP_CMD_GETVARDESCR, uint8Array, false, loadVariable);
-        currentVariable++;
-    } else {
-        currentNode++;
-        currentVariable = 0;
-        loadEnpConfig();
-    }
+function loadNodeDescription(node, callback) {
+    var bufferOut = new ArrayBuffer(2);
+    var uint16Array = new Uint8Array(bufferOut);
+    uint16Array[0] = node;
+    var data = new Uint8Array(bufferOut);
+    ENP.send_message(deviceID, ENPCodes.ENP_CMD_GETNODEDESCR, data, false, callback);
+}
+
+function loadVariableDescr(nodeId, currentVariable, callback) {
+    var bufferOut = new ArrayBuffer(4);
+    var uint16Array = new Uint16Array(bufferOut);
+    uint16Array[0] = nodeId;
+    uint16Array[1] = currentVariable;
+    var uint8Array = new Uint8Array(bufferOut);
+    ENP.send_message( deviceID, ENPCodes.ENP_CMD_GETVARDESCR, uint8Array, false, callback);
 }
 
 function loadValue(_currentNode, code) {
@@ -265,7 +289,7 @@ function loadValue(_currentNode, code) {
         currentValueNumber += numberOfValue;
         uint16Array[2] = numberOfValue;
         var uint8Array = new Uint8Array(bufferOut);
-        ENP.send_message(id, ENPCodes.ENP_CMD_GETVARS, uint8Array, false, false);
+        ENP.send_message(deviceID, ENPCodes.ENP_CMD_GETVARS, uint8Array, false, false);
         if (currentValueNumber >= nodes[_currentNode].numberOfVar) {
             currentValueNumber = 0;
             code();
@@ -297,7 +321,7 @@ function sendChunk(seq) {
         uint8Array[i + 5] = chunk.data[i];
     }
     ENP.send_message(
-        id, ENPCodes.ENP_CMD_WRITE_FIRMWARE, uint8Array, false, function(data) {
+        deviceID, ENPCodes.ENP_CMD_WRITE_FIRMWARE, uint8Array, false, function(data) {
             if (retSeq == (chunkNumber & 0xFF)) {
                 chunkNumber++;
             }
@@ -323,7 +347,7 @@ function writeFirmware(parsed_hex) {
     uint8Array[3] = (startChunk.address >>> 24) & 0xFF;
     stopFirmwareWrite = false;
     ENP.send_message(
-        id, ENPCodes.ENP_CMD_INIT_FIRMWARE, uint8Array, false, function(data) {
+        deviceID, ENPCodes.ENP_CMD_INIT_FIRMWARE, uint8Array, false, function(data) {
             sendChunk(0);
         });
 }
@@ -336,7 +360,7 @@ function completeWriteFirmware(crc) {
     uint8Array[2] = (crc >>> 16) & 0xFF;
     uint8Array[3] = (crc >>> 24) & 0xFF;
     ENP.send_message(
-        id, ENPCodes.ENP_CMD_COMPLETE_FIRMWARE, uint8Array, false, false);
+        deviceID, ENPCodes.ENP_CMD_COMPLETE_FIRMWARE, uint8Array, false, false);
 }
 
 function
@@ -361,7 +385,7 @@ setValue() {
         uint16Array[4] = setValueInfo.value >> 16;
     }
     var uint8Array = new Uint8Array(bufferOut);
-    ENP.send_message(id, ENPCodes.ENP_CMD_SETVARS, uint8Array, false, false);
+    ENP.send_message(deviceID, ENPCodes.ENP_CMD_SETVARS, uint8Array, false, false);
     console.log('sendValue');
 }
 
