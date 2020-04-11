@@ -487,7 +487,7 @@ input::-webkit-inner-spin-button {
     margin-right: 10px;
 }
 
-.progress {
+.mainProgress {
     width: 100%;
     height: 17px;
     border-radius: 5px;
@@ -496,27 +496,27 @@ input::-webkit-inner-spin-button {
     border-radius: 4px;
 }
 
-.progress::-webkit-progress-value {
-    background-color: #F86008;
-    border-radius: 4px;
-}
-
-.progress.valid::-webkit-progress-bar {
+.mainProgress::-webkit-progress-value {
     background-color: #ffbb00;
     border-radius: 4px;
 }
 
-.progress.valid::-webkit-progress-value {
+.mainProgress.valid::-webkit-progress-bar {
     background-color: #ffbb00;
     border-radius: 4px;
 }
 
-.progress.invalid::-webkit-progress-bar {
+.mainProgress.valid::-webkit-progress-value {
+    background-color: #ffbb00;
+    border-radius: 4px;
+}
+
+.mainProgress.invalid::-webkit-progress-bar {
     background-color: #A62E32;
     border-radius: 4px;
 }
 
-.progress.invalid::-webkit-progress-value {
+.mainProgress.invalid::-webkit-progress-value {
     background-color: #A62E32;
     border-radius: 4px;
 }
