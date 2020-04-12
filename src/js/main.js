@@ -55,6 +55,8 @@ function startProcess() {
         }
     });
 
+    $('#mainProgressBar').hide();
+
     // log webgl capability
     // it would seem the webgl "enabling" through advanced settings will be
     // ignored in the future and webgl will be supported if gpu supports it by
@@ -402,6 +404,11 @@ function startProcess() {
     chrome.storage.local.get('permanentExpertMode', function(result) {
         if (result.permanentExpertMode) {
             $('input[name="expertModeCheckbox"]').prop('checked', true);
+        }
+    });
+    chrome.storage.local.get('last_used_id', function(result) {
+        if (result.last_used_id) {
+            $('#enpDeviceID').val(result.last_used_id);
         }
     });
     $('.connect_b a.connect').removeClass('disabled');

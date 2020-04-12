@@ -78,24 +78,24 @@ function initializeSerialBackend() {
         }
     });
 
-    $('div.open_firmware_flasher a.flash').click(function() {
-        if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
-            $('div#flashbutton a.flash_state').removeClass('active');
-            $('div#flashbutton a.flash').removeClass('active');
-            document.getElementById('tab_landing').style.display = 'block';
-            document.getElementById('tab_help').style.display = 'block';
-            document.getElementById('tab_filesystemp').style.display = 'block';
-            $('#tabs ul.mode-disconnected .tab_landing a').click();
-        } else {
-            $('#tabs ul.mode-disconnected .tab_firmware_flasher a').click();
-            $('div.open_firmware_flasher a.flash_state')
-                .text(i18n.getMessage('flashTab'));
-            $('div#flashbutton a.flash_state').addClass('active');
-            $('div#flashbutton a.flash').addClass('active');
-            document.getElementById('tab_landing').style.display = 'none';
-            document.getElementById('tab_help').style.display = 'none';
-        }
-    });
+    // $('div.open_firmware_flasher a.flash').click(function() {
+    //     if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
+    //         $('div#flashbutton a.flash_state').removeClass('active');
+    //         $('div#flashbutton a.flash').removeClass('active');
+    //         document.getElementById('tab_landing').style.display = 'block';
+    //         document.getElementById('tab_help').style.display = 'block';
+    //         document.getElementById('tab_filesystemp').style.display = 'block';
+    //         $('#tabs ul.mode-disconnected .tab_landing a').click();
+    //     } else {
+    //         $('#tabs ul.mode-disconnected .tab_firmware_flasher a').click();
+    //         $('div.open_firmware_flasher a.flash_state')
+    //             .text(i18n.getMessage('flashTab'));
+    //         $('div#flashbutton a.flash_state').addClass('active');
+    //         $('div#flashbutton a.flash').addClass('active');
+    //         document.getElementById('tab_landing').style.display = 'none';
+    //         document.getElementById('tab_help').style.display = 'none';
+    //     }
+    // });
 
     // auto-connect
     chrome.storage.local.get('auto_connect', function(result) {
@@ -189,6 +189,9 @@ function onOpen(openInfo) {
 
         GUI.log(i18n.getMessage('serialPortOpened', [openInfo.connectionId]));
 
+        // show loading progress bar
+        $('#mainProgressBar').show();
+
         // save selected port with chrome.storage if the port differs
         chrome.storage.local.get('last_used_port', function(result) {
             if (result.last_used_port) {
@@ -211,6 +214,7 @@ function onOpen(openInfo) {
                 GUI.log(i18n.getMessage('noConfigurationReceived'));
 
                 $('div.connect_controls a.connect').click(); // disconnect
+                $('#mainProgressBar').hide();
             }
         }, 100000);
 
@@ -220,10 +224,22 @@ function onOpen(openInfo) {
         ENP.listen(enpHelper.process_data.bind(EnpHelper));
 
         // request configuration data
-        // var id = 17000;
-        id = parseInt($('#enpDeviceID').val());
-        GUI.log('Load device id: ' + id);
-        ENP.send_message(id, ENPCodes.ENP_CMD_GETNODENUM, false, false, function() {
+        var idFieldValue = $('#enpDeviceID').val();
+        // save selected device id with chrome.storage if the id differs
+        chrome.storage.local.get('last_used_id', function(result) {
+            if (result.last_used_id) {
+                if (result.last_used_id != idFieldValue) {
+                    // store the new one
+                    chrome.storage.local.set({ 'last_used_id': idFieldValue });
+                }
+            } else {
+                // variable isn't stored yet, saving
+                chrome.storage.local.set({ 'last_used_id': idFieldValue });
+            }
+        });
+        deviceID = parseInt(idFieldValue);
+        GUI.log('Load device id: ' + deviceID);
+        ENP.send_message(deviceID, ENPCodes.ENP_CMD_GETNODENUM, false, false, function() {
             GUI.log('Number nodes: ' + nodesNumber);
             loadEnpConfig();
         });
@@ -233,6 +249,7 @@ function onOpen(openInfo) {
 
         $('div#connectbutton a.connect_state').text(i18n.getMessage('connect'));
         $('div#connectbutton a.connect').removeClass('active');
+
 
         // unlock port select & baud
         $('div#port-picker #port, div#port-picker #baud, div#port-picker #delay')
@@ -308,6 +325,7 @@ function onClosed(result) {
     $('#tabs ul.mode-connected').hide();
     $('#tabs ul.mode-connected-cli').hide();
     $('#tabs ul.mode-disconnected').show();
+    $('#mainProgressBar').hide();
 
     updateStatusBarVersion();
     updateTopBarVersion();

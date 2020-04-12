@@ -79,7 +79,7 @@
                 </div>
                 <div id="portsinput">
                     <div class="inputwraper">
-                        <input id="enpDeviceID" class="input-dark" type="number" min="0" max="65535" value="17000">
+                        <input id="enpDeviceID" class="inputDevIdField" type="number" min="0" max="65535" value="17000">
                     </div>
                     <div class="dropdown dropdown-dark">
                         <select class="dropdown-select" id="port" i18n_title="firmwareFlasherManualPort">
@@ -125,6 +125,11 @@
             </div>
             <div id="scrollicon"></div>
             <div class="wrapper"></div>
+        </div>
+        <div id="mainProgressBar">
+            <div class="info">
+                <progress class="mainProgress" id="" value="35" min="0" max="100"></progress>
+            </div>
         </div>
         <div class="tab_container">
             <div id="tabs">

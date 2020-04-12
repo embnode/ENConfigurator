@@ -48,7 +48,6 @@ TABS.nodes_configuration.initialize = function(callback, scrollPosition) {
 
         tree.treetable({ expandable: true });
 
-        console.log($('#nodes-tree').data('treetable').nodes[0]);
         $('#nodes-tree').data('treetable').nodes[0].expand();
 
         tableMutableMark();
