@@ -218,7 +218,12 @@
     "defaultWelcomeIntro": {
         "message": "Welcome to <strong>Embedded Node - Configurator</strong>, a utility designed to simplify updating and configuring your embedded application."
     },
-
+    "defaultQuickStartHead": {
+        "message": "Quick start"
+    },
+    "defaultQuickStartText": {
+        "message": "1. Enter device ID. <li>2. Choose serial port. <li>3. Choose baudrate.<li>4. Click Connect button."
+    },
     "defaultWelcomeHead": {
         "message": "Info"
     },

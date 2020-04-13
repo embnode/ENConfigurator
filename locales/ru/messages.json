@@ -216,7 +216,12 @@
     "defaultWelcomeIntro": {
         "message": "Добро пожаловать в <strong>Embedded Node Configurator</strong>, созданный для упрощения обновления и конфигурирования встроенного приложения."
     },
-
+    "defaultQuickStartHead": {
+        "message": "Быстрый старт"
+    },
+    "defaultQuickStartText": {
+        "message": "1. Ввести ID устройства. <li>2. Выбрать порт. <li>3. Выбрать скорость порта.<li>4. Нажать \"Подключить\"."
+    },
     "defaultWelcomeHead": {
         "message": "Информация"
     },
@@ -240,12 +245,6 @@
     },
     "defaultButtonFirmwareFlasher": {
         "message": "Загрузка прошивки"
-    },
-    "defaultDonateHead": {
-        "message": "Открытый исходный код / Пожертвования"
-    },
-    "defaultDonateText": {
-        "message": "<strong>Embedded node</strong> программное обеспечение с <strong>открытым исходным кодом</strong> и доступное бесплатно <strong>без гарантий</strong> для всех пользователей.<br />Если вы сочтете этот проект полезным, рассмотрите  возможность <strong>поддержки</strong> разработки пожертвованием."
     },
     "defaultDonate": {
         "message": "Пожертвование"
