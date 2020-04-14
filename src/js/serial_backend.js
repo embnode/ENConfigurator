@@ -190,6 +190,7 @@ function onOpen(openInfo) {
         GUI.log(i18n.getMessage('serialPortOpened', [openInfo.connectionId]));
 
         // show loading progress bar
+        $('.mainProgress').val(0);
         $('#mainProgressBar').show();
 
         // save selected port with chrome.storage if the port differs

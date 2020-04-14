@@ -207,10 +207,10 @@
         "message": "TX: $1"
     },
     "statusbar_packet_error": {
-        "message": "Packet error:"
+        "message": "Пакетов с ошибкой:"
     },
     "statusbar_crc_error": {
-        "message": "CRC error:"
+        "message": "Ошибки CRC:"
     },
 
     "defaultWelcomeIntro": {
@@ -269,7 +269,7 @@
         "message": "Developer"
     },
     "firmwareFlasherWarningText": {
-        "message": "Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>Bootloader is stored in flash memory, it can be bricked.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /><strong>Note:</strong> If you have problems flashing <strong>try disconnecting all cables from your board</strong> first, try rebooting, upgrade chrome, upgrade drivers.<br />"
+        "message": "<span class=\"message-negative\">НЕ</span> <strong>ОТКЛЮЧАЙТЕ</strong> устройство или компьютер пока загружается прошивка.<br /><br /><strong>Предупреждение: </strong>Загрузчик расположен в флэш памяти, что может привести к выходу его из строя.<br /><strong>Предупреждение: </strong>Будьте уверены что имеете резервную копию ваших данных; некторые обновления могут привезти к потере данных.<br /><strong>Предупреждение:</strong> Если есть проблемы с загрузкой прошивки убедитесь, что устройство находится в режиме загрузчика.<br />"
     },
     "firmwareFlasherRecoveryHead": {
         "message": "<strong>Recovery / Lost communication</strong>"
@@ -281,16 +281,16 @@
         "message": "Leave Firmware Flasher"
     },
     "firmwareFlasherButtonLoadLocal": {
-        "message": "Load Firmware [Local]"
+        "message": "Выбрать прошивку"
     },
     "firmwareFlasherFlashFirmware": {
-        "message": "Flash Firmware"
+        "message": "Прошить"
     },
     "firmwareFlasherFirmwareNotLoaded": {
-        "message": "Firmware not loaded"
+        "message": "Прошивка не загружена"
     },
     "firmwareFlasherFirmwareLocalLoaded": {
-        "message": "Loaded Local Firmware: ($1 bytes)"
+        "message": "Загружена прошивка: ($1 bytes)"
     },
     "firmwareFlasherHexCorrupted": {
         "message": "HEX file appears to be corrupted"
@@ -332,7 +332,7 @@
         "message": "Progress:"
     },
     "firmwareFlasherLoadFirmwareFile": {
-        "message": "Please load firmware file"
+        "message": "Пожалуйста, выберете файл"
     },
     "tabNodes": {
         "message": "Узлы"
