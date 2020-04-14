@@ -156,6 +156,10 @@
     width: 30%;
 }
 
+.tab-landing .content_mid .text3 li {
+    padding: 5px;
+}
+
 .tab-landing .content_mid .text3 .wrap2 {
     border: 1px solid silver;
     border-radius: 5px;

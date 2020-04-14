@@ -218,7 +218,12 @@
     "defaultWelcomeIntro": {
         "message": "Welcome to <strong>Embedded Node - Configurator</strong>, a utility designed to simplify updating and configuring your embedded application."
     },
-
+    "defaultQuickStartHead": {
+        "message": "Quick start"
+    },
+    "defaultQuickStartText": {
+        "message": "1. Enter device ID. <li>2. Choose serial port. <li>3. Choose baudrate.<li>4. Click Connect button."
+    },
     "defaultWelcomeHead": {
         "message": "Info"
     },
@@ -272,7 +277,7 @@
         "message": "Developer"
     },
     "firmwareFlasherWarningText": {
-        "message": "Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>Bootloader is stored in flash memory, it can be bricked.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /><strong>Note:</strong> If you have problems flashing <strong>try disconnecting all cables from your board</strong> first, try rebooting, upgrade chrome, upgrade drivers.<br />"
+        "message": "Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>Bootloader is stored in flash memory, it can be bricked.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /><strong>Note:</strong> Make sure that current firmware supports firmware download.<br />"
     },
     "firmwareFlasherRecoveryHead": {
         "message": "<strong>Recovery / Lost communication</strong>"
