@@ -73,7 +73,7 @@ EnpHelper.prototype.process_data = function(dataHandler) {
                 variable.name = enc.decode(buff);
                 var index = findNodeById(variable.id);
                 nodes[index].vars.push(variable);
-                // console.log(nodes);
+                GUI.log('variable: ' + variable.name);
                 break;
             case ENPCodes.ENP_CMD_GETVARS:
                 var gettedVars = {};
@@ -190,7 +190,8 @@ EnpHelper.prototype.process_data = function(dataHandler) {
     for (var i = dataHandler.callbacks.length - 1; i >= 0;
          i--) { // itterating in reverse because we use .splice which modifies
         // array length
-        if (dataHandler.callbacks[i].code == code) {
+        let codeWithError = dataHandler.callbacks[i].code & 0x80;
+        if (dataHandler.callbacks[i].code == code || codeWithError == codeWithError) {
             // save callback reference
             var callback = dataHandler.callbacks[i].callback;
             var callbackOnError = dataHandler.callbacks[i].callbackOnError;
@@ -229,6 +230,7 @@ function configLoader(){
             configLoaderInfo.numberOfVariables = 0;
             configLoaderInfo.step = ENPStep.DESCRIPTION;
             configLoader();
+            $('.mainProgress').val(0);
             break;
         case ENPStep.DESCRIPTION:
             loadNodeDescription(configLoaderInfo.currentNode, configLoader);
@@ -237,7 +239,6 @@ function configLoader(){
                 configLoaderInfo.step = ENPStep.VARIABLE;
                 configLoaderInfo.currVar = 0;
                 configLoaderInfo.currentNode = 0;
-                $('.mainProgress').val(0);
                 configLoaderInfo.numberOfVariables = 0
                 configLoaderInfo.varLoaded = 0
             }
@@ -250,6 +251,15 @@ function configLoader(){
                 configLoaderInfo.varLoaded = 0;
             }
             let currNode = configLoaderInfo.currentNode;
+            if(nodes[currNode].numberOfVar == 0){
+                // find node with var
+                for(let j = currNode; j < nodesNumber; j++){
+                    if(nodes[j].numberOfVar > 0){
+                        break;
+                    }
+                    currNode = j;
+                }
+            }
             loadVariableDescr(nodes[currNode].id, configLoaderInfo.currVar, configLoader);
             let progress = (configLoaderInfo.varLoaded * 100) / configLoaderInfo.numberOfVariables;
             configLoaderInfo.currVar++;
