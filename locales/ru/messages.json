@@ -226,13 +226,13 @@
         "message": "Информация"
     },
     "defaultWelcomeText": {
-        "message": "Конфигуратор поддерживает устройства с реализованным протоколом Embedded node. <br><br>Вики Embedded node протокола отличный ресурс для получения информации. Вики находится <a href=\"https://github.com/embnode/enp/wiki\" target=\"_blank\">тут</a>.<br />"
+        "message": "Конфигуратор поддерживает устройства с реализованным протоколом Embedded node. <br><br>Если вы хотите узнать больше о протоколе Еmbedded node посетите <a href=\"https://github.com/embnode/enp/wiki\" target=\"_blank\">Вики</a>.<br />"
     },
     "defaultContributingHead": {
         "message": "Сотрудничество"
     },
     "defaultContributingText": {
-        "message": "Если вы хотите помочь проекту Embedded node вы можете сделать это разными путями. <br /><ul><li>Тестирование <a href=\"https://github.com/embnode/ENConfigurator/pulls\" target=\"_blank\">новых функций/исправлений</a> и обеспечение обратной связи.</li><li>Помощь с <a href=\"https://github.com/embnode/ENConfigurator/issues\" target=\"_blank\">проблемами и комментирование запросов на новые функции</a>.</li><li>Содействие перевода на другой язык.</li><li></li></ul>"
+        "message": "Если вы хотите помочь проекту вы можете это сделать следующими способами:<ul><li>Если Вы нашли баг то расскажите о нем <a href=\"https://github.com/embnode/ENConfigurator/issues\" target=\"_blank\">тут</a></li><li>Тестирование <a href=\"https://github.com/embnode/ENConfigurator/pulls\" target=\"_blank\">новых функций/исправлений</a></li></ul>"
     },
     "defaultChangelogAction": {
         "message": "Changelog"
@@ -269,13 +269,13 @@
         "message": "Developer"
     },
     "firmwareFlasherWarningText": {
-        "message": "<span class=\"message-negative\">НЕ</span> <strong>ОТКЛЮЧАЙТЕ</strong> устройство или компьютер пока загружается прошивка.<br /><br /><strong>Предупреждение: </strong>Загрузчик расположен в флэш памяти, что может привести к выходу его из строя.<br /><strong>Предупреждение: </strong>Будьте уверены что имеете резервную копию ваших данных; некторые обновления могут привезти к потере данных.<br /><strong>Предупреждение:</strong> Если есть проблемы с загрузкой прошивки убедитесь, что устройство находится в режиме загрузчика.<br />"
+        "message": "<span class=\"message-negative\">НЕ</span> <strong>ОТКЛЮЧАЙТЕ</strong> устройство или компьютер пока загружается прошивка.<br /><br /><strong>Предупреждение: </strong>Загрузчик расположен в флэш памяти, что может привести к выходу его из строя.<br /><strong>Предупреждение: </strong>Будьте уверены что имеете резервную копию ваших данных; некторые обновления могут привести к потере данных.<br /><strong>Предупреждение:</strong> Если есть проблемы с загрузкой прошивки убедитесь, что устройство находится в режиме загрузчика.<br />"
     },
     "firmwareFlasherRecoveryHead": {
-        "message": "<strong>Recovery / Lost communication</strong>"
+        "message": "<strong>Последовательность обновления прошивки</strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Power on</li><li>Install all drivers if required.<li>Close configurator, Close all running chrome instances, Close all Chrome apps, Restart Configurator.</li><li>Flash with correct firmware.</li><li>Power off.</li><li>Power on.</li><li>Connect normally.</li></ul>"
+        "message": "Если устройство не в режиме загрузчика, то переведите его в этот режим следующей последовательностью действий:<ul><li>Запомните идентификатор устройства! В режиме загрузчика устройство должно отвечать еще на идентификатор 65535.</li><li>Установите флаг смены прошивки с состоние true.</li><li>Отключитесь от устройства и перезагрузите его.</li><ul>Если вы в режиме загрузчика обновите прошивку следуя следующим шагам:<ul><li>Выберете прошивку нажав кнопку \"Выбрать прошивку\".</li><li>Нажмите кнопку \"Прошить\".</li><li>После окночания загрузки прошивки зайдите во вкладку Узлы и поменяйте в корневом узле флаг смены прошивки на false.</li><li>Отключитесь и перезагрузите устройство.</li><li>Подключитесь нормально.</li></ul>"
     },
     "firmwareFlasherButtonLeave": {
         "message": "Leave Firmware Flasher"
