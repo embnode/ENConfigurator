@@ -228,46 +228,30 @@ function configLoader(){
             configLoaderInfo.currentNode = 0;
             configLoaderInfo.currVar = 0;
             configLoaderInfo.numberOfVariables = 0;
-            configLoaderInfo.step = ENPStep.DESCRIPTION;
-            configLoader();
+            loadNodeDescription(configLoaderInfo.currentNode, configLoader);
+            configLoaderInfo.currVar = 0;
+            configLoaderInfo.step = ENPStep.VARIABLE;
             $('.mainProgress').val(0);
             break;
         case ENPStep.DESCRIPTION:
             loadNodeDescription(configLoaderInfo.currentNode, configLoader);
-            configLoaderInfo.currentNode++;
-            if(configLoaderInfo.currentNode >= nodesNumber){
-                configLoaderInfo.step = ENPStep.VARIABLE;
-                configLoaderInfo.currVar = 0;
-                configLoaderInfo.currentNode = 0;
-                configLoaderInfo.numberOfVariables = 0
-                configLoaderInfo.varLoaded = 0
-            }
+            configLoaderInfo.step = ENPStep.VARIABLE;
+            configLoaderInfo.currVar = 0;
             break;
         case ENPStep.VARIABLE:
-            if(configLoaderInfo.numberOfVariables == 0){
-                for(let i = 0; i < nodesNumber; i++){
-                    configLoaderInfo.numberOfVariables += nodes[i].numberOfVar;
-                }
-                configLoaderInfo.varLoaded = 0;
-            }
             let currNode = configLoaderInfo.currentNode;
-            if(nodes[currNode].numberOfVar == 0){
-                // find node with var
-                for(let j = currNode; j < nodesNumber; j++){
-                    if(nodes[j].numberOfVar > 0){
-                        break;
-                    }
-                    currNode = j;
-                }
-            }
             loadVariableDescr(nodes[currNode].id, configLoaderInfo.currVar, configLoader);
-            let progress = (configLoaderInfo.varLoaded * 100) / configLoaderInfo.numberOfVariables;
+            // } else {
+            //     configLoaderInfo.step = ENPStep.DESCRIPTION;
+            //     configLoaderInfo.currentNode++;
+            //     configLoader();
+            // }
+            //let progress = (configLoaderInfo.varLoaded * 100) / configLoaderInfo.numberOfVariables;
             configLoaderInfo.currVar++;
-            configLoaderInfo.varLoaded++;
-            $('.mainProgress').val(progress);
+            $('.mainProgress').val(40);
             if (configLoaderInfo.currVar >= nodes[currNode].numberOfVar) {
+                configLoaderInfo.step = ENPStep.DESCRIPTION;
                 configLoaderInfo.currentNode++;
-                configLoaderInfo.currVar = 0;
                 if(configLoaderInfo.currentNode >= nodesNumber){
                     configLoaderInfo.step = ENPStep.FINISH;
                 }
