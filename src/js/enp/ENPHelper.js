@@ -22,6 +22,7 @@ var NumberOfchunks = 0;
 var retSeq = -1;
 var stopFirmwareWrite = false;
 var firmwareCRC = 0;
+const PROGRESS_LENGHT = 100;
 
 function EnpHelper()
 {
@@ -73,7 +74,7 @@ EnpHelper.prototype.process_data = function(dataHandler) {
                 variable.name = enc.decode(buff);
                 var index = findNodeById(variable.id);
                 nodes[index].vars.push(variable);
-                // console.log(nodes);
+                GUI.log('variable: ' + variable.name);
                 break;
             case ENPCodes.ENP_CMD_GETVARS:
                 var gettedVars = {};
@@ -190,7 +191,8 @@ EnpHelper.prototype.process_data = function(dataHandler) {
     for (var i = dataHandler.callbacks.length - 1; i >= 0;
          i--) { // itterating in reverse because we use .splice which modifies
         // array length
-        if (dataHandler.callbacks[i].code == code) {
+        let codeWithError = dataHandler.callbacks[i].code & 0x80;
+        if (dataHandler.callbacks[i].code == code || codeWithError == codeWithError) {
             // save callback reference
             var callback = dataHandler.callbacks[i].callback;
             var callbackOnError = dataHandler.callbacks[i].callbackOnError;
@@ -227,37 +229,28 @@ function configLoader(){
             configLoaderInfo.currentNode = 0;
             configLoaderInfo.currVar = 0;
             configLoaderInfo.numberOfVariables = 0;
-            configLoaderInfo.step = ENPStep.DESCRIPTION;
-            configLoader();
+            loadNodeDescription(configLoaderInfo.currentNode, configLoader);
+            configLoaderInfo.currVar = 0;
+            configLoaderInfo.step = ENPStep.VARIABLE;
+            $('.mainProgress').val(0);
             break;
         case ENPStep.DESCRIPTION:
             loadNodeDescription(configLoaderInfo.currentNode, configLoader);
-            configLoaderInfo.currentNode++;
-            if(configLoaderInfo.currentNode >= nodesNumber){
-                configLoaderInfo.step = ENPStep.VARIABLE;
-                configLoaderInfo.currVar = 0;
-                configLoaderInfo.currentNode = 0;
-                $('.mainProgress').val(0);
-                configLoaderInfo.numberOfVariables = 0
-                configLoaderInfo.varLoaded = 0
-            }
+            configLoaderInfo.step = ENPStep.VARIABLE;
+            configLoaderInfo.currVar = 0;
             break;
         case ENPStep.VARIABLE:
-            if(configLoaderInfo.numberOfVariables == 0){
-                for(let i = 0; i < nodesNumber; i++){
-                    configLoaderInfo.numberOfVariables += nodes[i].numberOfVar;
-                }
-                configLoaderInfo.varLoaded = 0;
-            }
             let currNode = configLoaderInfo.currentNode;
             loadVariableDescr(nodes[currNode].id, configLoaderInfo.currVar, configLoader);
-            let progress = (configLoaderInfo.varLoaded * 100) / configLoaderInfo.numberOfVariables;
             configLoaderInfo.currVar++;
-            configLoaderInfo.varLoaded++;
-            $('.mainProgress').val(progress);
+            configLoaderInfo.progress = (configLoaderInfo.currentNode * PROGRESS_LENGHT) / nodesNumber;
+            let varProgressLen = (PROGRESS_LENGHT / nodesNumber);
+            let varProgress = (configLoaderInfo.currVar * varProgressLen) / nodes[currNode].numberOfVar;
+            configLoaderInfo.progress += varProgress;
+            $('.mainProgress').val(configLoaderInfo.progress);
             if (configLoaderInfo.currVar >= nodes[currNode].numberOfVar) {
+                configLoaderInfo.step = ENPStep.DESCRIPTION;
                 configLoaderInfo.currentNode++;
-                configLoaderInfo.currVar = 0;
                 if(configLoaderInfo.currentNode >= nodesNumber){
                     configLoaderInfo.step = ENPStep.FINISH;
                 }

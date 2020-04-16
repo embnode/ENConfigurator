@@ -280,10 +280,11 @@
         "message": "Do <span class=\"message-negative\">not</span> <strong>disconnect</strong> the board or <strong>turn off</strong> your computer while flashing.<br /><br /><strong>Note: </strong>Bootloader is stored in flash memory, it can be bricked.<br /><strong>Note: </strong>Make sure you have a backup; some upgrades/downgrades will wipe your configuration.<br /><strong>Note:</strong> Make sure that current firmware supports firmware download.<br />"
     },
     "firmwareFlasherRecoveryHead": {
-        "message": "<strong>Recovery / Lost communication</strong>"
+        "message": "<strong>Firmware update sequence</strong>"
     },
     "firmwareFlasherRecoveryText": {
-        "message": "If you have lost communication with your board follow these steps to restore communication: <ul><li>Power off</li><li>Power on</li><li>Install all drivers if required.<li>Close configurator, Close all running chrome instances, Close all Chrome apps, Restart Configurator.</li><li>Flash with correct firmware.</li><li>Power off.</li><li>Power on.</li><li>Connect normally.</li></ul>"
+        "message": "If device isn't in bootloader mode, switch device in this mode follow the next steps:<ul><li>Remember device ID! In bootloader mode device have to response on 65535 ID.</li><li>Switch filed \"Change firmware\" in true state.</li><li>Disconnect and reboot device.</li><ul>If you are in bootloader mode:<ul><li>Click to \"Load Firmware\".</li><li>Click \"Flash Firmware\".</li><li>After loading switch in Nodes tab and switch \"Change firmware\" in false state.</li><li>Disconnect and reboot device.</li><li>Connect normaly.</li></ul>"
+
     },
     "firmwareFlasherButtonLeave": {
         "message": "Leave Firmware Flasher"
