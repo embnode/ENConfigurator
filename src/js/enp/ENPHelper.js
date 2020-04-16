@@ -22,6 +22,7 @@ var NumberOfchunks = 0;
 var retSeq = -1;
 var stopFirmwareWrite = false;
 var firmwareCRC = 0;
+const PROGRESS_LENGHT = 100;
 
 function EnpHelper()
 {
@@ -241,14 +242,12 @@ function configLoader(){
         case ENPStep.VARIABLE:
             let currNode = configLoaderInfo.currentNode;
             loadVariableDescr(nodes[currNode].id, configLoaderInfo.currVar, configLoader);
-            // } else {
-            //     configLoaderInfo.step = ENPStep.DESCRIPTION;
-            //     configLoaderInfo.currentNode++;
-            //     configLoader();
-            // }
-            //let progress = (configLoaderInfo.varLoaded * 100) / configLoaderInfo.numberOfVariables;
             configLoaderInfo.currVar++;
-            $('.mainProgress').val(40);
+            configLoaderInfo.progress = (configLoaderInfo.currentNode * PROGRESS_LENGHT) / nodesNumber;
+            let varProgressLen = (PROGRESS_LENGHT / nodesNumber);
+            let varProgress = (configLoaderInfo.currVar * varProgressLen) / nodes[currNode].numberOfVar;
+            configLoaderInfo.progress += varProgress;
+            $('.mainProgress').val(configLoaderInfo.progress);
             if (configLoaderInfo.currVar >= nodes[currNode].numberOfVar) {
                 configLoaderInfo.step = ENPStep.DESCRIPTION;
                 configLoaderInfo.currentNode++;
