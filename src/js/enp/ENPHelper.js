@@ -241,7 +241,20 @@ function configLoader(){
             break;
         case ENPStep.VARIABLE:
             let currNode = configLoaderInfo.currentNode;
-            loadVariableDescr(nodes[currNode].id, configLoaderInfo.currVar, configLoader);
+            if (nodes[currNode].numberOfVar != 0){
+                loadVariableDescr(nodes[currNode].id, configLoaderInfo.currVar, configLoader);
+            } else {
+                configLoaderInfo.currentNode++;
+                if(configLoaderInfo.currentNode >= nodesNumber){
+                    configLoaderInfo.step = ENPStep.FINISH;
+                    configLoader();
+                } else {
+                    loadNodeDescription(configLoaderInfo.currentNode, configLoader);
+                    configLoaderInfo.step = ENPStep.VARIABLE;
+                    configLoaderInfo.currVar = 0;
+                    break;
+                }
+            }
             configLoaderInfo.currVar++;
             configLoaderInfo.progress = (configLoaderInfo.currentNode * PROGRESS_LENGHT) / nodesNumber;
             let varProgressLen = (PROGRESS_LENGHT / nodesNumber);
