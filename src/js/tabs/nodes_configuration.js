@@ -17,9 +17,45 @@ TABS.nodes_configuration.initialize = function(callback, scrollPosition) {
     }
 
     load_html();
-
+    function move(arr, elIndex, newIndex){
+        var temp = arr[elIndex];
+        nodes.splice(elIndex, 1);
+        insert(arr, newIndex, temp);
+    }
+    function insert(arr, index, element){
+        arr.push(element);
+        for(let i = arr.length - 1; i > index; i--){
+            arr[i] = arr[i - 1];
+        }
+        arr[index] = element;
+    }
     function process_html() {
-        var tableBody = $('#table-body')
+        var tableBody = $('#table-body');
+        nodes.sort(function(a , b){
+            return a.id - b.id;
+        })
+        var idList = [];
+        var nodesLen = nodes.length;
+        for(let i = 0; i < nodesLen; i++){
+            idList.push(nodes[i].id);
+        }
+        for (let i = 0; i < idList.length; i++){
+            // looking for id index
+            var idIndex = undefined;
+            for(let k = 0; k < nodesLen; k++){
+                if(nodes[k].id == idList[i]){
+                    idIndex = k;
+                    break;
+                }
+            }
+            // looking for all child and append
+            for (let k = 0; k < nodesLen; k++){
+                if((idList[i] == nodes[k].pid) && (nodes[k].id != nodes[k].pid)){
+                    move(nodes, k, idIndex + 1);
+                    idIndex++;
+                }
+            }
+        }
         for (var i = 0; i < nodesNumber; i++) {
             var nodId = i;
             var pId = '';
