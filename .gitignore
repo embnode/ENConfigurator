@@ -11,6 +11,7 @@ dist/
 debug/
 release/
 package-lock.json
+yarn.locks
 *.code-workspace
 
 # artefacts for Visual Studio Code
