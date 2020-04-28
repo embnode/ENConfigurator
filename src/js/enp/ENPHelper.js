@@ -348,22 +348,32 @@ function sendChunk(seq) {
         });
     let progress = Math.floor((chunkNumber * 100) / NumberOfchunks);
     flasherSetProgress(progress);
-
-    //}
 }
 
 function writeFirmware(parsed_hex) {
     hexFirmware = parsed_hex;
     firmwareCRC = hexFirmware.crc;
+    let totalLength = hexFirmware.bytes_total;
     chunkNumber = 0;
     NumberOfchunks = hexFirmware.data.length;
-    var bufferOut = new ArrayBuffer(4);
+    var bufferOut = new ArrayBuffer(12);
     var uint8Array = new Uint8Array(bufferOut);
     let startChunk = hexFirmware.data[0];
     uint8Array[0] = startChunk.address & 0xFF;
     uint8Array[1] = (startChunk.address >>> 8) & 0xFF;
     uint8Array[2] = (startChunk.address >>> 16) & 0xFF;
     uint8Array[3] = (startChunk.address >>> 24) & 0xFF;
+
+    uint8Array[4] = firmwareCRC & 0xFF;
+    uint8Array[5] = (firmwareCRC >>> 8) & 0xFF;
+    uint8Array[6] = (firmwareCRC >>> 16) & 0xFF;
+    uint8Array[7] = (firmwareCRC >>> 24) & 0xFF;
+
+    uint8Array[8] = totalLength & 0xFF;
+    uint8Array[9] = (totalLength >>> 8) & 0xFF;
+    uint8Array[10] = (totalLength >>> 16) & 0xFF;
+    uint8Array[11] = (totalLength >>> 24) & 0xFF;
+
     stopFirmwareWrite = false;
     ENP.send_message(
         deviceID, ENPCodes.ENP_CMD_INIT_FIRMWARE, uint8Array, false, function(data) {
