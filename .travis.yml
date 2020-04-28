@@ -20,9 +20,6 @@ git:
 
 language: node_js
 
-node_js:
-  - 10
-
 addons:
   chrome: stable
 
