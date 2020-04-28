@@ -1,10 +1,14 @@
+branches:
+  except:
+  - l10n_master
+
 os:
   - linux
   - osx
 
 sudo: false
 
-dist: trusty
+dist: bionic
 
 addons:
   apt:
@@ -17,19 +21,28 @@ git:
 language: node_js
 
 node_js:
-  - 8.11.2
+  - 10
 
 addons:
   chrome: stable
 
 before_install:
-  - npm i -g npm@6.0.1
-  - npm install gulp -g
-
+  - |
+    echo "Target branch: $TRAVIS_BRANCH"
+    echo "Commit range: $TRAVIS_COMMIT_RANGE"
+    if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+      COMMIT_RANGE="$TRAVIS_BRANCH"
+    else
+      COMMIT_RANGE="$TRAVIS_COMMIT_RANGE"
+    fi
+    git diff --name-only $COMMIT_RANGE | grep -qvE '(\.md)|(^(locales|resources/osd))/' || {
+      echo "Only files not used in the build process were updated, aborting."
+      exit
+    }
 script:
-  - npm test
-  - gulp release
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then gulp release --chromeos; fi
+  - yarn test
+  - yarn gulp release
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then yarn gulp release --chromeos; fi
 
 cache:
   directories:
