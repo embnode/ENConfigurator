@@ -621,7 +621,7 @@ function getLinuxPackageArch(type, arch) {
 }
 // Create distribution package for macOS platform
 function release_osx64() {
-    var appdmg = require('gulp-appdmg');
+    var appdmg = require('gulp-macdmg');
 
     // The appdmg does not generate the folder correctly, manually
     createDirIfNotExists(RELEASE_DIR);

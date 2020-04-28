@@ -375,7 +375,7 @@ class CANFS {
                     for (let i = 0; i < cmdOut.length; i++) {
                         outArray[2 + i] = cmdOut.payload[i];
                     }
-                    ENP.send_message(id, ENPCodes.ENP_CMD_FILESYSTEM, outArray, false, false);
+                    ENP.send_message(deviceID, ENPCodes.ENP_CMD_FILESYSTEM, outArray, false, false);
 
                     console.log('[CANFS] Command sent: ' + cmdOut.type);
                 } else if (cmdOut.length == 0) {

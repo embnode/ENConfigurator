@@ -1,7 +1,7 @@
 {
     "name": "emnode-configurator",
     "description": "Crossplatform configuration tool for Embedded node protocol.",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "main": "main_nwjs.html",
     "bg-script": "js/eventPage.js",
     "default_locale": "en",
@@ -21,20 +21,19 @@
         "url": "github.com/embnode/ENConfigurator"
     },
     "webview": {
-        "partitions": [{
-            "name": "map",
-            "accessible_resources": [
-                "tabs/map.html",
-                "js/tabs/map.js",
-                "/images/icons/cf_icon_position.png"
-            ]
-        }]
+        "partitions": [
+            {
+                "name": "map",
+                "accessible_resources": [
+                    "tabs/map.html",
+                    "js/tabs/map.js",
+                    "/images/icons/cf_icon_position.png"
+                ]
+            }
+        ]
     },
     "author": "The Embedded Node Configurator open source project.",
     "license": "GPL-3.0",
-    "engines": {
-        "node": "10.x"
-    },
     "dependencies": {
         "i18next": "^19.3.4",
         "i18next-xhr-backend": "^3.2.2",
@@ -51,7 +50,7 @@
         "fs-extra": "^9.0.0",
         "gulp": "^4.0.2",
         "gulp-concat": "~2.6.1",
-        "gulp-debian": "~0.1.8",
+        "gulp-debian": "~0.1.9",
         "gulp-git": "^2.10.1",
         "gulp-install": "^1.1.0",
         "gulp-rename": "~2.0.0",
@@ -77,6 +76,6 @@
         "temp": "^0.9.1"
     },
     "optionalDependencies": {
-        "gulp-appdmg": "^1.0.3"
+        "gulp-macdmg": "0.0.1"
     }
 }
