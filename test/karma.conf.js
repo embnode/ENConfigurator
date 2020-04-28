@@ -10,7 +10,7 @@ module.exports = function(config) {
             './src/js/localization.js',
             './src/js/gui.js',
             './src/js/tabs/cli.js',
-            './test/**/*.js'
+            './test/*.js'
         ],
         browsers: ['ChromeHeadlessNoSandbox'],
         customLaunchers: {
