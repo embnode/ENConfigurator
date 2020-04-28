@@ -21,14 +21,16 @@
         "url": "github.com/embnode/ENConfigurator"
     },
     "webview": {
-        "partitions": [{
-            "name": "map",
-            "accessible_resources": [
-                "tabs/map.html",
-                "js/tabs/map.js",
-                "/images/icons/cf_icon_position.png"
-            ]
-        }]
+        "partitions": [
+            {
+                "name": "map",
+                "accessible_resources": [
+                    "tabs/map.html",
+                    "js/tabs/map.js",
+                    "/images/icons/cf_icon_position.png"
+                ]
+            }
+        ]
     },
     "author": "The Embedded Node Configurator open source project.",
     "license": "GPL-3.0",
@@ -48,7 +50,7 @@
         "fs-extra": "^9.0.0",
         "gulp": "^4.0.2",
         "gulp-concat": "~2.6.1",
-        "gulp-debian": "~0.1.8",
+        "gulp-debian": "~0.1.9",
         "gulp-git": "^2.10.1",
         "gulp-install": "^1.1.0",
         "gulp-rename": "~2.0.0",
@@ -74,6 +76,6 @@
         "temp": "^0.9.1"
     },
     "optionalDependencies": {
-        "appdmg": "^0.6.0"
+        "gulp-macdmg": "0.0.1"
     }
 }
