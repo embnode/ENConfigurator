@@ -78,25 +78,6 @@ function initializeSerialBackend() {
         }
     });
 
-    // $('div.open_firmware_flasher a.flash').click(function() {
-    //     if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
-    //         $('div#flashbutton a.flash_state').removeClass('active');
-    //         $('div#flashbutton a.flash').removeClass('active');
-    //         document.getElementById('tab_landing').style.display = 'block';
-    //         document.getElementById('tab_help').style.display = 'block';
-    //         document.getElementById('tab_filesystemp').style.display = 'block';
-    //         $('#tabs ul.mode-disconnected .tab_landing a').click();
-    //     } else {
-    //         $('#tabs ul.mode-disconnected .tab_firmware_flasher a').click();
-    //         $('div.open_firmware_flasher a.flash_state')
-    //             .text(i18n.getMessage('flashTab'));
-    //         $('div#flashbutton a.flash_state').addClass('active');
-    //         $('div#flashbutton a.flash').addClass('active');
-    //         document.getElementById('tab_landing').style.display = 'none';
-    //         document.getElementById('tab_help').style.display = 'none';
-    //     }
-    // });
-
     // auto-connect
     chrome.storage.local.get('auto_connect', function(result) {
         if (result.auto_connect === 'undefined' || result.auto_connect) {
