@@ -40,6 +40,7 @@
         "jquery.filebrowser": "^0.8.2",
         "marked": "^0.8.0",
         "natives": "^1.1.6",
+        "short-unique-id": "^3.0.3",
         "universal-ga": "^1.2.0"
     },
     "devDependencies": {

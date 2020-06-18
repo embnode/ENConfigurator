@@ -1,6 +1,24 @@
 'use strict';
 
+const { default: ShortUniqueId } = require('short-unique-id');
+
+var nwGui = getNwGui();
+
+var googleAnalytics = analytics;
+var analytics = undefined;
+
 openNewWindowsInExternalBrowser();
+
+function getNwGui() {
+    var gui = null;
+    try {
+        gui = require('nw.gui');
+    } catch (ex) {
+        console.log("Could not require 'nw.gui', maybe inside chrome");
+    }
+
+    return gui;
+}
 
 $(document).ready(function() {
     $.getJSON('version.json', function(data) {
@@ -12,6 +30,75 @@ $(document).ready(function() {
         });
     });
 });
+
+function checkSetupAnalytics(callback) {
+    if (!analytics) {
+        setTimeout(function () {
+            chrome.storage.local.get(['userId', 'analyticsOptOut', 'checkForConfiguratorUnstableVersions', ], function (result) {
+                if (!analytics) {
+                    setupAnalytics(result);
+                }
+
+                callback(analytics);
+            });
+        });
+    } else if (callback) {
+        callback(analytics);
+    }
+};
+
+function getBuildType() {
+    return nwGui ? 'NW.js' : 'Chrome';
+}
+
+function setupAnalytics(result) {
+    var userId;
+    if (result.userId) {
+        userId = result.userId;
+    } else {
+        var uid = new ShortUniqueId();
+        userId = uid.randomUUID(13);
+
+        chrome.storage.local.set({ 'userId': userId });
+    }
+
+    var optOut = !!result.analyticsOptOut;
+    var checkForDebugVersions = !!result.checkForConfiguratorUnstableVersions;
+
+    var debugMode = typeof process === "object" && process.versions['nw-flavor'] === 'sdk';
+
+    analytics = new Analytics('UA-169225177-1', userId, 'Betaflight Configurator', getManifestVersion(), CONFIGURATOR.gitChangesetId, GUI.operating_system, checkForDebugVersions, optOut, debugMode, getBuildType());
+    console.log("New analytic");
+    console.log(analytics);
+    function logException(exception) {
+        analytics.sendException(exception.stack);
+    }
+
+    if (typeof process === "object") {
+        process.on('uncaughtException', logException);
+    }
+
+    analytics.sendEvent(analytics.EVENT_CATEGORIES.APPLICATION, 'AppStart', { sessionControl: 'start' });
+
+    function sendCloseEvent() {
+        analytics.sendEvent(analytics.EVENT_CATEGORIES.APPLICATION, 'AppClose', { sessionControl: 'end' })
+    }
+
+    if (nwGui) {
+        var win = nwGui.Window.get();
+        win.on('close', function () {
+            sendCloseEvent();
+
+            this.close(true);
+        });
+    } else {
+        // Looks like we're in Chrome - but the event does not actually get fired
+        chrome.runtime.onSuspend.addListener(sendCloseEvent);
+    }
+
+    $('.connect_b a.connect').removeClass('disabled');
+    $('.firmware_b a.flash').removeClass('disabled');
+}
 
 // Process to execute to real start the app
 function startProcess() {
@@ -132,6 +219,10 @@ function startProcess() {
                 function content_ready() {
                     GUI.tab_switch_in_progress = false;
                 }
+
+                checkSetupAnalytics(function (analytics) {
+                    analytics.sendAppView(tab);
+                });
 
                 switch (tab) {
                     case 'landing':
