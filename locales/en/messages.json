@@ -121,6 +121,9 @@
     "tabLanding": {
         "message": "Welcome"
     },
+    "tabCharts": {
+        "message": "Charts"
+    },
     "tabHelp": {
         "message": "Documentation & Support"
     },

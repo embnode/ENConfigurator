@@ -22,7 +22,7 @@
         "message": "Настройка приложения"
     },
     "connect": {
-        "message": "Подключится"
+        "message": "Подключиться"
     },
     "connecting": {
         "message": "Подключаюсь"
@@ -120,6 +120,9 @@
     },
     "tabLanding": {
         "message": "Добро пожаловать"
+    },
+    "tabCharts": {
+        "message": "Графики"
     },
     "tabHelp": {
         "message": "Документация & Поддержка"

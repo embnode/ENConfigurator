@@ -15,6 +15,7 @@ var GUI_control = function() {
 
     this.defaultAllowedTabsWhenDisconnected = [
         'landing',
+        'charts'
     ];
     this.defaultAllowedFCTabsWhenConnected = [
         'nodes_configuration', 'firmware_flasher', 'help', 'osd', 'power',

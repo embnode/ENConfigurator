@@ -228,6 +228,9 @@ function startProcess() {
                     case 'landing':
                         TABS.landing.initialize(content_ready);
                         break;
+                    case 'charts':
+                        TABS.charts.initialize(content_ready);
+                        break;
                     case 'firmware_flasher':
                         TABS.firmware_flasher.initialize(content_ready);
                         break;
@@ -286,7 +289,7 @@ function startProcess() {
     // options
     $('a#options').click(function() {
         var el = $(this);
-
+     
         if (!el.hasClass('active')) {
             el.addClass('active');
             el.after('<div id="options-window"></div>');
