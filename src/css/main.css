@@ -1693,6 +1693,8 @@ dialog {
 .tab-nodes_configuration,
 .tab-filesystem,
 .tab-firmware_flasher,
+.tab-chart,
+/* TODO delete */
 .tab-gps,
 .tab-help,
 .tab-led-strip,
