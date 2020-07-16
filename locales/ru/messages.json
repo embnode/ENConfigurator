@@ -272,7 +272,7 @@
         "message": "Developer"
     },
     "firmwareFlasherWarningText": {
-        "message": "<span class=\"message-negative\">НЕ</span> <strong>ОТКЛЮЧАЙТЕ</strong> устройство или компьютер пока загружается прошивка.<br /><br /><strong>Предупреждение: </strong>Загрузчик расположен в флэш памяти, что может привести к выходу его из строя.<br /><strong>Предупреждение: </strong>Будьте уверены что имеете резервную копию ваших данных; некторые обновления могут привести к потере данных.<br /><strong>Предупреждение:</strong> Если есть проблемы с загрузкой прошивки убедитесь, что устройство находится в режиме загрузчика.<br />"
+        "message": "<span class=\"message-negative\">НЕ</span> <strong>ОТКЛЮЧАЙТЕ</strong> устройство или компьютер пока загружается прошивка.<br /><br /><strong>Предупреждение: </strong>Загрузчик расположен в флэш памяти, что может привести к выходу его из строя.<br /><strong>Предупреждение: </strong>Будьте уверены что имеете резервную копию ваших данных; некоторые обновления могут привести к потере данных.<br /><strong>Предупреждение:</strong> Если есть проблемы с загрузкой прошивки убедитесь, что устройство находится в режиме загрузчика.<br />"
     },
     "firmwareFlasherRecoveryHead": {
         "message": "<strong>Последовательность обновления прошивки</strong>"
@@ -320,7 +320,7 @@
         "message": "Detected: <strong>$1</strong> - previous device still flashing, please replug to try again"
     },
     "firmwareFlasherWritten": {
-        "message": "Firmware has been written"
+        "message": "Прошивка загружена"
     },
     "firmwareFlasherPath": {
         "message": "Path:"

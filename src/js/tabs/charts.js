@@ -6,6 +6,9 @@ var currentTime = 0;
 var sinRad = 0;
 var chartLenght = 50;
 var ampl = [1, 0.5, 2, 0.7, 1.2];
+var chartList = [];
+let currentVar = 0;
+const CHART_REFRESH_MS = 200;
 
 TABS.charts = {};
 TABS.charts.initialize = function (callback) {
@@ -18,40 +21,13 @@ TABS.charts.initialize = function (callback) {
     $('#content').load("./tabs/charts.html", function () {
         // translate to user-selected language
         i18n.localizePage();
-        //var data = [12, 15, 28, 30];
 
         var ctx = document.getElementById('myChart').getContext('2d');
         var lineChart = new Chart(ctx, {
             type: 'line',
             data: {
-              labels: [0],
-              datasets: [{ 
-                  data: [0],
-                  label: "sin 1",
-                  borderColor: "#3e95cd",
-                  fill: false
-                }, { 
-                  data: [0],
-                  label: "sin 2",
-                  borderColor: "#8e5ea2",
-                  fill: false
-                }, { 
-                  data: [0],
-                  label: "sin 3",
-                  borderColor: "#3cba9f",
-                  fill: false
-                }, { 
-                  data: [0],
-                  label: "sin 4",
-                  borderColor: "#e8c3b9",
-                  fill: false
-                }, { 
-                  data: [0],
-                  label: "sin 5",
-                  borderColor: "#c45850",
-                  fill: false
-                }
-              ]
+              labels: [],
+              datasets: []
             },
             options: {
               title: {
@@ -60,25 +36,49 @@ TABS.charts.initialize = function (callback) {
               }
             }
         });
-        // for(let i = 0; i < 50; i++){
-        //     AddDataChart(lineChart, "newData", data);
-        // }
+        
+        // add new charts from list
+        chartList.forEach((chart) => {
+          let newChar = {
+            data: [],
+            label: chart.name,
+            borderColor: getRandomColor(),
+            fill: false
+          }
+          lineChart.data.datasets.push(newChar);
+        });
+
+        // status data pulled via separate timer with static speed
+        GUI.interval_add('status_pull', function() {
+            if(chartList.length > 0) {
+              let cv = currentVar;
+              loadChartValue(chartList[cv].nodeId, chartList[cv].varNumber, function() {
+                let i = chartList[cv].i;
+                let j = chartList[cv].j;
+                data[cv] = nodes[i].vars[j].value;
+                currentVar++;
+                if(currentVar >= chartList.length){
+                  currentVar = 0;
+                }
+              });
+            }
+        }, 100, true);
 
         // status data pulled via separate timer with static speed
         GUI.interval_add('ChartUpdate', function() {
-            console.log("Interval");
-            let i = 0;
-            data = data.map(function(val){
-                return Math.sin(sinRad + ampl[i]) * ampl[i++];
-            });
-            sinRad += 0.5;
-            AddDataChart(lineChart, currentTime, data);
-            console.log(lineChart.data.labels.length);
+            // Test data. It would be nice to leave for the testes
+            // let i = 0;
+            // data = data.map(function(val){
+            //     return Math.sin(sinRad + ampl[i]) * ampl[i++];
+            // });
+            // sinRad += 0.5;
+            AddDataChart(lineChart, currentTime * CHART_REFRESH_MS / 1000, data);
             if(lineChart.data.labels.length > chartLenght) {
-                ShiftChart(lineChart);
+              ShiftChart(lineChart);
             }
             currentTime++;
-        }, 200, true);
+            lineChart.update()
+        }, CHART_REFRESH_MS, true);
 
         GUI.content_ready(callback);
     });
@@ -96,7 +96,6 @@ function AddDataChart(chart, label, data) {
         dataset.data.push(data[i]);
         i++;
     });
-    chart.update();
 }
 // Remove first element from chart
 function ShiftChart(chart) {
@@ -104,5 +103,13 @@ function ShiftChart(chart) {
     chart.data.datasets.forEach((dataset) => {
         dataset.data.shift();
     });
-    chart.update();
+}
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }

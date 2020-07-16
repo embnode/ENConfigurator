@@ -78,21 +78,17 @@ var ENP = {
                 }
                 break;
             case 7: // checksum
-                this.message_checksum = data[i];
                 enpBuffer[enpBufferIndex++] = data[i];
                 this.state++;
                 break;
             case 8: // checksum
                 // calculate message crc
                 enpBuffer[enpBufferIndex++] = data[i];
-                // var crc = CRC16_Enp(data, data.length - 2, 0xFFFF);
                 var crc = CRC16_Enp(enpBuffer, enpBufferIndex - 2, 0xFFFF);
-                this.message_checksum = (data[i] << 8) | this.message_checksum;
+                this.message_checksum = (data[i] << 8) | data[i-1];
                 if (crc == this.message_checksum) {
                     this.dataView = new DataView(
                         this.message_buffer, 0, this.message_length_received);
-                    // var buff = new Uint8Array(this.message_buffer, 0,
-                    // this.message_length_received); console.log(buff);
                     this.notify();
                     this.crcError = false;
                 } else {
