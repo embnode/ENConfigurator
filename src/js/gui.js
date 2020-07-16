@@ -14,13 +14,11 @@ var GUI_control = function() {
     this.timeout_array = [];
 
     this.defaultAllowedTabsWhenDisconnected = [
-        'landing',
-        'charts'
+        'landing'
     ];
     this.defaultAllowedFCTabsWhenConnected = [
-        'nodes_configuration', 'firmware_flasher', 'help', 'osd', 'power',
-        'adjustments', 'auxiliary', 'cli', 'configuration', 'gps', 'logging',
-        'onboard_logging', 'modes', 'ports', 'filesystem'
+        'nodes_configuration', 'firmware_flasher', 'help',
+        'filesystem', 'charts'
     ];
     this.defaultAllowedOSDTabsWhenConnected = [
         'setup_osd',

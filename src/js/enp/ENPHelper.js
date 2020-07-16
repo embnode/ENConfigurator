@@ -102,8 +102,6 @@ EnpHelper.prototype.process_data = function(dataHandler) {
                         value = '0x' + data.readU32().toString(16);
                         break;
                     case ENPType.CHAR4:
-                        // TODO char 4
-                        value = data.readU32().toString(16);
                         break;
                     case ENPType.TIME:
                         var milliseconds = data.readU32();
@@ -316,6 +314,21 @@ function loadValue(_currentNode, code) {
     }
 }
 
+function loadChartValue(nodeId, varNumber, code) {
+    var bufferOut = new ArrayBuffer(6);
+    var uint16Array = new Uint16Array(bufferOut);
+    // node ID
+    uint16Array[0] = nodeId;
+    // number first var
+    uint16Array[1] = varNumber;
+    // number vars
+    uint16Array[2] = 1;
+    var uint8Array = new Uint8Array(bufferOut);
+    ENP.send_message(deviceID, ENPCodes.ENP_CMD_GETVARS, uint8Array, false, function(){
+        code();
+    });
+}
+
 function sendChunk(seq) {
     if (stopFirmwareWrite == true) {
         return;
@@ -392,8 +405,7 @@ function completeWriteFirmware(crc) {
         deviceID, ENPCodes.ENP_CMD_COMPLETE_FIRMWARE, uint8Array, false, false);
 }
 
-function
-setValue() {
+function setValue() {
     var bufferOut = new ArrayBuffer(10);
     var uint16Array = new Uint16Array(bufferOut);
     // node ID

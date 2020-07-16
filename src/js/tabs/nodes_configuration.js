@@ -97,6 +97,7 @@ TABS.nodes_configuration.initialize = function(callback, scrollPosition) {
             var inputNumber = $('#nodeNumberInput');
             var inputBool = $('#inputSetBool');
             var buttonSend = $('#buttonSetValue');
+            var btnAddToChart = $('#btnAddToChart');
             buttonSend.removeAttr('onclick').off('click'); // remove click function
             for (var i = 0; i < nodesNumber; i++) {
                 for (var j = 0; j < nodes[i].numberOfVar; j++) {
@@ -178,6 +179,29 @@ TABS.nodes_configuration.initialize = function(callback, scrollPosition) {
                             }
                             sendFlag = 1;
                             console.log(setValueInfo);
+                        });
+                        btnAddToChart.click(function() {
+                            let i = setValue.node;
+                            let j = setValue.var;
+                            let chartElement = {};
+                            let isUniq = true;
+
+                            chartElement.name = nodes[i].vars[j].name;
+                            chartElement.nodeId = nodes[i].id;
+                            chartElement.varNumber = nodes[i].vars[j].number;
+                            chartElement.i = i;
+                            chartElement.j = j;
+                            // add only unuquie elements
+                            chartList.forEach(element => {
+                                if(element.name == chartElement.name &&
+                                    element.nodeId == chartElement.nodeId &&
+                                    element.varNumber == chartElement.varNumber) {
+                                    isUniq = false;
+                                }
+                            });
+                            if(isUniq) {
+                                chartList.push(chartElement);
+                            }
                         });
                         break;
                     }
