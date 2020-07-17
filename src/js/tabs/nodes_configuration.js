@@ -98,6 +98,8 @@ TABS.nodes_configuration.initialize = function(callback, scrollPosition) {
             var inputBool = $('#inputSetBool');
             var buttonSend = $('#buttonSetValue');
             var btnAddToChart = $('#btnAddToChart');
+            let chkBoxAddToChart = $('#chkBoxAddChart');
+            chkBoxAddToChart.prop("checked", true);
             buttonSend.removeAttr('onclick').off('click'); // remove click function
             for (var i = 0; i < nodesNumber; i++) {
                 for (var j = 0; j < nodes[i].numberOfVar; j++) {
@@ -180,6 +182,14 @@ TABS.nodes_configuration.initialize = function(callback, scrollPosition) {
                             sendFlag = 1;
                             console.log(setValueInfo);
                         });
+                        chkBoxAddToChart.click(function(e){
+                            if(this.checked == true) {
+                                console.log("yes");
+                            } else {
+                                console.log("no");
+                            }
+                            console.log("Check box was changed");
+                        }) 
                         btnAddToChart.click(function() {
                             let i = setValue.node;
                             let j = setValue.var;

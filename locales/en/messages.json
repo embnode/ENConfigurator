@@ -285,6 +285,9 @@
     "firmwareFlasherRecoveryHead": {
         "message": "<strong>Firmware update sequence</strong>"
     },
+    "addToChart": {
+        "message": "Add to chart"
+    },
     "firmwareFlasherRecoveryText": {
         "message": "If device isn't in bootloader mode, switch device in this mode follow the next steps:<ul><li>Remember device ID! In bootloader mode device have to response on 65535 ID.</li><li>Switch filed \"Change firmware\" in true state.</li><li>Disconnect and reboot device.</li><ul>If you are in bootloader mode:<ul><li>Click to \"Load Firmware\".</li><li>Click \"Flash Firmware\".</li><li>After loading switch in Nodes tab and switch \"Change firmware\" in false state.</li><li>Disconnect and reboot device.</li><li>Connect normaly.</li></ul>"
 
