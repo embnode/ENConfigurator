@@ -22,10 +22,10 @@
         "message": "Настройка приложения"
     },
     "connect": {
-        "message": "Подключится"
+        "message": "Подключиться"
     },
     "connecting": {
-        "message": "Подключаюсь"
+        "message": "Соединение"
     },
     "disconnect": {
         "message": "Отключить"
@@ -317,7 +317,19 @@
         "message": "Detected: <strong>$1</strong> - previous device still flashing, please replug to try again"
     },
     "firmwareFlasherWritten": {
-        "message": "Firmware has been written"
+        "message": "Прошивка загружена"
+    },
+    "firmwareFlasherVerify": {
+        "message": "Проверка"
+    },
+    "firmwareFlasherErasing": {
+        "message": "Стирание"
+    },
+    "firmwareFlasherProgramming": {
+        "message": "Прошивка"
+    },
+    "firmwareFlasherWriteError": {
+        "message": "Ошибка прошивки"
     },
     "firmwareFlasherPath": {
         "message": "Path:"

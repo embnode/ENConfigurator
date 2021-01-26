@@ -18,10 +18,13 @@ var sendFlag = 0;
 var newNodeValue = 0;
 var hexFirmware = false;
 var chunkNumber = 0;
+let verifyChunkNumber = 0;
 var NumberOfchunks = 0;
 var retSeq = -1;
 var stopFirmwareWrite = false;
-var firmwareCRC = 0;
+let eraseState = 0;
+let eraseCurrAddr = 0;
+let isEraseComplete = true;
 const PROGRESS_LENGHT = 100;
 
 function EnpHelper()
@@ -79,7 +82,6 @@ EnpHelper.prototype.process_data = function(dataHandler) {
             case ENPCodes.ENP_CMD_GETVARS:
                 var gettedVars = {};
                 var index = findNodeById(data.readU16()); // node id
-                // nodes[index].vars.prop
                 gettedVars.firstVarNum = data.readU16(); // number of first variable
                 gettedVars.numOfVars = data.readU16(); // number of variables
                 for (let i = 0; i < gettedVars.numOfVars; i++) {
@@ -141,6 +143,42 @@ EnpHelper.prototype.process_data = function(dataHandler) {
             case ENPCodes.ENP_CMD_WRITE_FIRMWARE:
                 retSeq = data.read32();
                 firmwareError(retSeq);
+                break;
+            case ENPCodes.ENP_CMD_ERASE_FIRMWARE:
+                eraseState = data.read32();
+                if(eraseState == 0) {
+                    isEraseComplete = true;
+                }
+                eraseCurrAddr = data.read32();
+                let verfyStartAddr = hexFirmware.data[0].address;
+                let verfyEndAddr = hexFirmware.data[hexFirmware.data.length - 1].address;
+                let progress = Math.floor(((eraseCurrAddr - verfyStartAddr) * 100) / (verfyEndAddr - verfyStartAddr));
+                flasherSetProgress(progress);
+                break;
+            case ENPCodes.ENP_CMD_VERIFY_FIRMWARE:
+                let verifyStartAddr = hexFirmware.data[0].address;
+                let verifyEndAddr = hexFirmware.data[hexFirmware.data.length - 1].address;
+                let verAddr = data.read32();
+                let verBuff = new Uint8Array(data.buffer);
+                // looking for a chank
+                for(let i = 0; i < hexFirmware.data.length; i++){
+                    if(hexFirmware.data[i].address == verAddr){
+                        let chankBuff = new Uint8Array(hexFirmware.data[i].data);
+                        let progress = Math.floor(((verAddr - verifyStartAddr) * 100) / (verifyEndAddr - verifyStartAddr));
+                        flasherSetProgress(progress);
+                        if(chankBuff.length == verBuff.length - 4){
+                            for(let j = 0; j < chankBuff.length; j++) {
+                                if(chankBuff[j] != verBuff[j + 4]){
+                                    console.log('verify error. Data on Address:' +  verAddr);
+                                    break;
+                                }
+                            }
+                        } else {
+                            console.log('verify error. Lenght on Address:' +  hexFirmware.data[verifyChunkNumber - 1].address);
+                        }
+                        break;
+                    }
+                }
                 break;
             case ENPCodes.ENP_CMD_INIT_FIRMWARE:
                 retSeq = data.read32();
@@ -316,14 +354,33 @@ function loadValue(_currentNode, code) {
     }
 }
 
+function firmwareVerify(verChunkNumber) {
+    if (verifyChunkNumber >= NumberOfchunks) {
+        console.log('Verifed');
+        flasherFirmwareWritten();
+        return;
+    }
+    let verifyChunk = hexFirmware.data[verChunkNumber];
+    var bufferOut = new ArrayBuffer(5);
+    var uint8Array = new Uint8Array(bufferOut);
+    uint8Array[0] = verifyChunk.address & 0xFF;
+    uint8Array[1] = (verifyChunk.address >>> 8) & 0xFF;
+    uint8Array[2] = (verifyChunk.address >>> 16) & 0xFF;
+    uint8Array[3] = (verifyChunk.address >>> 24) & 0xFF;
+    uint8Array[4] = verifyChunk.bytes; // len
+    ENP.send_message(
+        deviceID, ENPCodes.ENP_CMD_VERIFY_FIRMWARE, uint8Array, false, function(data) {
+            verifyChunkNumber++;
+            firmwareVerify(verifyChunkNumber);
+        });
+}
+
 function sendChunk(seq) {
     if (stopFirmwareWrite == true) {
         return;
     }
     if (chunkNumber >= NumberOfchunks) {
-        console.log('Firmware has been written');
-        completeWriteFirmware(firmwareCRC);
-        flasherFirmwareWritten();
+        completeWriteFirmware();
         return;
     }
     var chunk = hexFirmware.data[chunkNumber];
@@ -350,50 +407,78 @@ function sendChunk(seq) {
     flasherSetProgress(progress);
 }
 
+function GetEraseState() {
+    var bufferOut = new ArrayBuffer(12);
+    var uint8Array = new Uint8Array(bufferOut);
+
+    if (isEraseComplete) {
+        console.log('Erased');
+        flasherSetProgressText(i18n.getMessage('firmwareFlasherProgramming'))
+        let startChunk = hexFirmware.data[0];
+        uint8Array[0] = startChunk.address & 0xFF;
+        uint8Array[1] = (startChunk.address >>> 8) & 0xFF;
+        uint8Array[2] = (startChunk.address >>> 16) & 0xFF;
+        uint8Array[3] = (startChunk.address >>> 24) & 0xFF;
+        stopFirmwareWrite = false;
+        ENP.send_message(
+            deviceID, ENPCodes.ENP_CMD_INIT_FIRMWARE, uint8Array, false, function(data) {
+                sendChunk(0);
+            });
+    } else {        
+        ENP.send_message(
+            deviceID, ENPCodes.ENP_CMD_ERASE_FIRMWARE, uint8Array, false, function(data) {
+                GetEraseState();
+            });
+    }
+}
+
 function writeFirmware(parsed_hex) {
     hexFirmware = parsed_hex;
-    firmwareCRC = hexFirmware.crc;
     let totalLength = hexFirmware.bytes_total;
     chunkNumber = 0;
     NumberOfchunks = hexFirmware.data.length;
+    let startChunk = hexFirmware.data[0];
+    let stopChunk = hexFirmware.data[hexFirmware.data.length - 1];
+    
+    eraseCurrAddr = startChunk.address;
+    let command = 1;
     var bufferOut = new ArrayBuffer(12);
     var uint8Array = new Uint8Array(bufferOut);
-    let startChunk = hexFirmware.data[0];
-    uint8Array[0] = startChunk.address & 0xFF;
-    uint8Array[1] = (startChunk.address >>> 8) & 0xFF;
-    uint8Array[2] = (startChunk.address >>> 16) & 0xFF;
-    uint8Array[3] = (startChunk.address >>> 24) & 0xFF;
-
-    uint8Array[4] = firmwareCRC & 0xFF;
-    uint8Array[5] = (firmwareCRC >>> 8) & 0xFF;
-    uint8Array[6] = (firmwareCRC >>> 16) & 0xFF;
-    uint8Array[7] = (firmwareCRC >>> 24) & 0xFF;
-
-    uint8Array[8] = totalLength & 0xFF;
-    uint8Array[9] = (totalLength >>> 8) & 0xFF;
-    uint8Array[10] = (totalLength >>> 16) & 0xFF;
-    uint8Array[11] = (totalLength >>> 24) & 0xFF;
-
-    stopFirmwareWrite = false;
+    uint8Array[0] = command & 0xFF;
+    uint8Array[1] = (command >>> 8) & 0xFF;
+    uint8Array[2] = (command >>> 16) & 0xFF;
+    uint8Array[3] = (command >>> 24) & 0xFF;
+    
+    uint8Array[4] = startChunk.address & 0xFF;
+    uint8Array[5] = (startChunk.address >>> 8) & 0xFF;
+    uint8Array[6] = (startChunk.address >>> 16) & 0xFF;
+    uint8Array[7] = (startChunk.address >>> 24) & 0xFF;
+    
+    let stopAddress = stopChunk.address + stopChunk.data.length;
+    uint8Array[8] = stopAddress & 0xFF;
+    uint8Array[9] = (stopAddress >>> 8) & 0xFF;
+    uint8Array[10] = (stopAddress >>> 16) & 0xFF;
+    uint8Array[11] = (stopAddress >>> 24) & 0xFF;
+    isEraseComplete = false;
+    flasherSetProgressText(i18n.getMessage('firmwareFlasherErasing'))
     ENP.send_message(
-        deviceID, ENPCodes.ENP_CMD_INIT_FIRMWARE, uint8Array, false, function(data) {
-            sendChunk(0);
+        deviceID, ENPCodes.ENP_CMD_ERASE_FIRMWARE, uint8Array, false, function(data) {
+            GetEraseState();
         });
-}
+    }
 
-function completeWriteFirmware(crc) {
-    var bufferOut = new ArrayBuffer(4);
+function completeWriteFirmware() {
+    var bufferOut = new ArrayBuffer(1);
     var uint8Array = new Uint8Array(bufferOut);
-    uint8Array[0] = crc & 0xFF;
-    uint8Array[1] = (crc >>> 8) & 0xFF;
-    uint8Array[2] = (crc >>> 16) & 0xFF;
-    uint8Array[3] = (crc >>> 24) & 0xFF;
     ENP.send_message(
-        deviceID, ENPCodes.ENP_CMD_COMPLETE_FIRMWARE, uint8Array, false, false);
+        deviceID, ENPCodes.ENP_CMD_COMPLETE_FIRMWARE, uint8Array, false, function(){
+            verifyChunkNumber = 0;
+            firmwareVerify(verifyChunkNumber);
+        });
+    flasherSetProgressText(i18n.getMessage('firmwareFlasherVerify'))  
 }
 
-function
-setValue() {
+function setValue() {
     var bufferOut = new ArrayBuffer(10);
     var uint16Array = new Uint16Array(bufferOut);
     // node ID

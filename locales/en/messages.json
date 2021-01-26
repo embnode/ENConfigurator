@@ -328,6 +328,18 @@
     "firmwareFlasherWritten": {
         "message": "Firmware has been written"
     },
+    "firmwareFlasherVerify": {
+        "message": "Verify"
+    },
+    "firmwareFlasherErasing": {
+        "message": "Erasing"
+    },
+    "firmwareFlasherProgramming": {
+        "message": "Programming"
+    },
+    "firmwareFlasherWriteError": {
+        "message": "Flasher error"
+    },
     "firmwareFlasherPath": {
         "message": "Path:"
     },

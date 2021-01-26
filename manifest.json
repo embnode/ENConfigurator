@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "minimum_chrome_version": "38",
-    "version": "0.1.1",
+    "version": "0.2.1",
     "author": "Embedded Node",
     "name": "Embedded Node - Configurator",
     "short_name": "ENP",

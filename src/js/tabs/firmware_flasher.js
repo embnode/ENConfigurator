@@ -213,11 +213,13 @@ function Intel_hex_parser(data, callback)
             break;
         case 0x02: // extended segment address record
             // not implemented
+            console.log('not implemented')
             if (parseInt(content, 16) != 0) { // ignore if segment is 0
                 console.log('extended segment address record found - NOT IMPLEMENTED !!!');
             }
             break;
         case 0x03: // start segment address record
+            console.log('not implemented')
             // not implemented
             if (parseInt(content, 16) != 0) { // ignore if segment is 0
                 console.log('start segment address record found - NOT IMPLEMENTED !!!');
@@ -231,14 +233,60 @@ function Intel_hex_parser(data, callback)
             break;
         }
     }
-
+    // let packedResult = {
+    //     data : [],
+    //     end_of_file : false,
+    //     bytes_total : 0,
+    //     start_linear_address : 0,
+    //     crc : 0
+    // };
+    // packedResult.bytes_total = result.bytes_total;
+    // packedResult.start_linear_address = result.start_linear_address;
+    // packedResult.end_of_file = result.end_of_file;
+    // packedResult.crc = result.crc;
+    // let bytes = 0;
+    // let dataArray = [];
+    // let packAddress = 0;
+    // let nextAddress = result.data[0].address;
+    // const FRM_PACK_LEN = 128
+    // for (let i = 0; i < result.data.length; i++)
+    // {
+    //     if((nextAddress != result.data[i].address) && (i != 0)) {
+    //         packedResult.data.push({ 'address' : packAddress, 'bytes' : bytes, 'data' : dataArray });
+    //         bytes = 0;
+    //         dataArray = [];
+    //         packAddress = 0;
+    //     }
+    //     if(bytes >= FRM_PACK_LEN) {
+    //         packedResult.data.push({ 'address' : packAddress, 'bytes' : bytes, 'data' : dataArray });
+    //         bytes = 0;
+    //         dataArray = [];
+    //         packAddress = 0;
+    //     }
+    //     bytes += result.data[i].bytes;
+    //     dataArray = dataArray.concat(result.data[i].data);
+    //     if(packAddress == 0) {
+    //         packAddress = result.data[i].address;
+    //     }
+    //     nextAddress = result.data[i].address + result.data[i].bytes;
+    //     if(i == result.data.length - 1) {
+    //         packedResult.data.push({ 'address' : packAddress, 'bytes' : bytes, 'data' : dataArray });
+    //     }
+    // }
     if (result.end_of_file && hexfile_valid) {
+        //crc32 = 0xFFFFFFFF;
         for (let i = 0; i < result.data.length; i++)
         {
             crc32 = CRC32_Enp(result.data[i].data, crc32);
         }
-        console.log("Firmware CRC: " + crc32);
+        //let crc32Pack = 0xFFFFFFFF;
+        //for (let i = 0; i < packedResult.data.length; i++)
+        //{
+        //    crc32Pack = CRC32_Enp(packedResult.data[i].data, crc32Pack);
+        //}
+        //console.log("Firmware CRC: " + crc32 + "Pack " + crc32Pack);
         result.crc = crc32;
+        //callback(packedResult);
         callback(result);
     } else {
         callback(false);
@@ -254,6 +302,10 @@ function flasherFirmwareWritten()
 {
     $('.progress').val(100);
     $('span.progressLabel').text(i18n.getMessage('firmwareFlasherWritten'));
+}
+
+function flasherSetProgressText(text) {
+    $('span.progressLabel').text(text);
 }
 
 function flasherFirmwareViewError(code)
